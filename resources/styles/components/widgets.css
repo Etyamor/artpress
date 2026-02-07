@@ -1,0 +1,62 @@
+/* WordPress block widgets in sidebar */
+
+.wp-block-categories-list {
+  @apply list-none m-0 p-0 flex flex-col;
+}
+
+.wp-block-categories-list .cat-item {
+  @apply border-b border-border-subtle last:border-b-0;
+  @apply flex items-center justify-between py-2.5 text-sm text-muted;
+}
+
+.wp-block-categories-list .cat-item a {
+  @apply flex items-center text-sm text-foreground-secondary no-underline transition-colors;
+}
+
+.wp-block-categories-list .cat-item a:hover {
+  @apply text-accent;
+}
+
+.wp-block-categories-list .cat-item a::before {
+  font-family: var(--fa-family-classic);
+  font-weight: 900;
+  content: '\f07b';
+  @apply mr-2 text-xs text-muted transition-colors;
+}
+
+.wp-block-categories-list .cat-item a:hover::before {
+  @apply text-accent;
+}
+
+/* Active category */
+
+.wp-block-categories-list .current-cat > a {
+  @apply text-accent font-semibold;
+}
+
+.wp-block-categories-list .current-cat > a::before {
+  content: '\f07c';
+  @apply text-accent;
+}
+
+/* Tag cloud — badges */
+
+.wp-block-tag-cloud {
+  @apply flex flex-wrap gap-2 m-0;
+}
+
+.wp-block-tag-cloud .tag-cloud-link {
+  font-size: inherit !important;
+  @apply inline-block px-3 py-1 text-xs font-medium text-foreground-secondary no-underline;
+  @apply bg-background border border-border rounded-full transition-colors;
+}
+
+.wp-block-tag-cloud .tag-cloud-link:hover {
+  @apply bg-accent-subtle text-accent border-accent;
+}
+
+/* Active tag */
+
+.wp-block-tag-cloud .tag-cloud-link.current-tag {
+  @apply bg-accent text-white border-accent;
+}

@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@source "../../template-parts/**/*.php";
+@source "../../inc/**/*.php";
 @import "@fortawesome/fontawesome-free/css/fontawesome.css";
 @import "@fortawesome/fontawesome-free/css/solid.css";
 @import "./fonts.css";

@@ -1,22 +1,10 @@
-/* Nav — mobile: fixed overlay; desktop: inline */
-
-.site-nav {
-  @apply fixed inset-0 top-16 z-40 bg-white overflow-y-auto;
-  @apply opacity-0 invisible transition-all duration-200 ease-in-out;
-}
+/* Nav open state (toggled via JS) */
 
 .site-nav.open {
   @apply opacity-100 visible;
 }
 
-@media (min-width: 1024px) {
-  .site-nav {
-    @apply static opacity-100 visible overflow-visible bg-transparent;
-    transition: none;
-  }
-}
-
-/* Menu list */
+/* WordPress menu output */
 
 .header-menu {
   @apply list-none m-0 p-0;
@@ -28,8 +16,6 @@
     @apply flex-row items-center gap-1 px-0 pt-0;
   }
 }
-
-/* Top-level links */
 
 .header-menu > li {
   @apply relative;
@@ -80,7 +66,7 @@
   }
 }
 
-/* Sub-menu — mobile: indented list; desktop: absolute dropdown */
+/* Sub-menu — mobile: indented; desktop: dropdown */
 
 .header-menu .sub-menu {
   @apply list-none m-0 p-0 pl-4 flex flex-col;
@@ -115,15 +101,7 @@
   @apply text-accent-hover;
 }
 
-/* Burger button */
-
-.burger-button {
-  @apply p-2 text-foreground-secondary rounded-md transition-colors;
-}
-
-.burger-button:hover {
-  @apply text-accent bg-accent-subtle;
-}
+/* Burger icon toggle (JS state) */
 
 .burger-button .close-icon {
   @apply hidden;
@@ -135,4 +113,25 @@
 
 .burger-button.menu-open .close-icon {
   @apply block;
+}
+
+/* Category links (WP output from the_category()) */
+
+.post-card-category a {
+  @apply text-accent no-underline;
+}
+
+.post-card-category a:hover {
+  @apply text-accent-hover;
+}
+
+/* Post tags (WP output from the_tags()) */
+
+[rel="tag"] {
+  @apply inline-block px-3 py-1 text-xs font-medium text-foreground-secondary no-underline
+         bg-background border border-border rounded-full transition-colors;
+}
+
+[rel="tag"]:hover {
+  @apply bg-accent-subtle text-accent border-accent;
 }

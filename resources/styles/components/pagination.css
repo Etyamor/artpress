@@ -1,0 +1,31 @@
+/* Pagination (WordPress output from the_posts_pagination) */
+
+.screen-reader-text {
+  @apply sr-only;
+}
+
+.nav-links {
+  @apply flex items-center justify-center gap-1 mt-8;
+}
+
+.nav-links .page-numbers {
+  @apply inline-flex items-center justify-center min-w-10 h-10 px-3 text-sm font-medium
+       text-foreground-secondary no-underline border border-border rounded-lg transition-colors;
+}
+
+.nav-links .page-numbers:hover {
+  @apply bg-accent-subtle text-accent border-accent;
+}
+
+.nav-links .page-numbers.current {
+  @apply bg-accent text-white border-accent;
+}
+
+.nav-links .page-numbers.dots {
+  @apply border-none hover:bg-transparent hover:text-foreground-secondary cursor-default;
+}
+
+.nav-links .prev,
+.nav-links .next {
+  @apply px-4;
+}

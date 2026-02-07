@@ -1,3 +1,4 @@
-@import "./components/header.css";
 @import "./components/nav.css";
+@import "./components/pagination.css";
+@import "./components/widgets.css";
 @import "./components/footer.css";

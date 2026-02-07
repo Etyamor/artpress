@@ -1,6 +1,6 @@
 <button
     type="button"
-    class="burger-button lg:hidden"
+    class="burger-button p-2 text-foreground-secondary rounded-md transition-colors hover:text-accent hover:bg-accent-subtle lg:hidden"
     aria-expanded="false"
     aria-controls="site-nav"
     aria-label="<?php esc_attr_e('Toggle menu', 'artpress'); ?>"

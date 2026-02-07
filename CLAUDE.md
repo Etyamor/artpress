@@ -68,6 +68,10 @@ Fonts and images are imported through CSS, not PHP. Vite parses CSS files to bun
 
 **Important:** Vite does not parse PHP files for assets. Assets referenced only in PHP won't be bundled. If needed, create a separate folder for PHP-only assets or ensure they're imported somewhere in the CSS/JS entry points.
 
+## Styling Rules
+
+**Always prefer Tailwind utility classes directly in PHP templates.** Only use CSS component files (`resources/styles/components/`) with `@apply` when styling markup that WordPress generates and you cannot control — such as `wp_nav_menu()` output, `the_category()` links, widget internals, or JS-driven state toggles (e.g. `.open`, `.menu-open`). If you can add classes to the HTML element in a template, use Tailwind classes there instead of creating a CSS rule.
+
 ## Theme Structure
 
 ### Root Level
