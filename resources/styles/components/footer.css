@@ -17,7 +17,7 @@
 }
 
 .footer-legal-menu li a {
-  @apply text-on-dark-subtle no-underline transition-colors;
+  @apply text-on-dark-muted no-underline transition-colors;
 }
 
 .footer-legal-menu li a:hover {

@@ -1,6 +1,7 @@
 <?php get_header(); ?>
 
 <main class="max-w-6xl mx-auto px-6 py-10">
+    <h1 class="text-3xl font-bold text-foreground mb-8"><?php esc_html_e('Latest Posts', 'artpress'); ?></h1>
     <div class="flex flex-col lg:flex-row lg:items-start gap-10">
         <!-- Posts -->
         <div class="flex-1 min-w-0 flex flex-col gap-6">

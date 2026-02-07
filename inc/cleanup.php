@@ -11,5 +11,11 @@ add_action('after_setup_theme', function () {
         wp_dequeue_style('wp-block-library');
         wp_dequeue_style('classic-theme-styles');
         wp_dequeue_style('global-styles');
+        wp_dequeue_style('dashicons');
+        wp_dequeue_style('wp-block-library-theme');
+
+        wp_dequeue_script('jquery');
+        wp_dequeue_script('jquery-migrate');
+        wp_dequeue_script('wp-embed');
     }, 100);
 });
