@@ -14,5 +14,9 @@
     "tailwindcss": "^4.1.13",
     "vite": "^7.1.6",
     "vite-plugin-image-optimizer": "^2.0.2"
+  },
+  "dependencies": {
+    "@fontsource/raleway": "^5.2.8",
+    "@fortawesome/fontawesome-free": "^7.1.0"
   }
 }

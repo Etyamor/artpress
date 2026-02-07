@@ -1,0 +1,67 @@
+/*
+ * Theme Colors
+ *
+ * Palette + semantic tokens.
+ * To change the theme, swap the hex values in @theme.
+ * Current palette: Tailwind Purple + Zinc.
+ */
+
+@theme {
+  /* Primary palette (Tailwind Purple) */
+  --color-primary-50: #faf5ff;
+  --color-primary-100: #f3e8ff;
+  --color-primary-200: #e9d5ff;
+  --color-primary-300: #d8b4fe;
+  --color-primary-400: #c084fc;
+  --color-primary-500: #a855f7;
+  --color-primary-600: #9333ea;
+  --color-primary-700: #7e22ce;
+  --color-primary-800: #6b21a8;
+  --color-primary-900: #581c87;
+  --color-primary-950: #3b0764;
+
+  /* Neutral palette (Tailwind Zinc) */
+  --color-neutral-50: #fafafa;
+  --color-neutral-100: #f4f4f5;
+  --color-neutral-200: #e4e4e7;
+  --color-neutral-300: #d4d4d8;
+  --color-neutral-400: #a1a1aa;
+  --color-neutral-500: #71717a;
+  --color-neutral-600: #52525b;
+  --color-neutral-700: #3f3f46;
+  --color-neutral-800: #27272a;
+  --color-neutral-900: #18181b;
+  --color-neutral-950: #09090b;
+}
+
+/* Semantic aliases — use @theme inline so var() references resolve at runtime */
+@theme inline {
+  /* Foreground (light context) */
+  --color-foreground: var(--color-neutral-900);
+  --color-foreground-secondary: var(--color-neutral-700);
+  --color-foreground-muted: var(--color-neutral-600);
+  --color-muted: var(--color-neutral-500);
+
+  /* Background */
+  --color-background: var(--color-neutral-50);
+
+  /* Border */
+  --color-border: var(--color-neutral-200);
+  --color-border-subtle: var(--color-neutral-100);
+
+  /* Accent */
+  --color-accent: var(--color-primary-600);
+  --color-accent-hover: var(--color-primary-700);
+  --color-accent-light: var(--color-primary-100);
+  --color-accent-subtle: var(--color-primary-50);
+  --color-accent-foreground: var(--color-primary-900);
+
+  /* Dark surfaces (footer, dark sections) */
+  --color-surface-dark: var(--color-neutral-900);
+  --color-surface-dark-border: var(--color-neutral-800);
+  --color-on-dark: var(--color-neutral-300);
+  --color-on-dark-heading: var(--color-neutral-200);
+  --color-on-dark-muted: var(--color-neutral-400);
+  --color-on-dark-subtle: var(--color-neutral-500);
+  --color-accent-on-dark: var(--color-primary-400);
+}

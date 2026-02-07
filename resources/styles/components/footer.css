@@ -1,0 +1,25 @@
+/* Footer menus */
+
+.footer-menu {
+  @apply list-none p-0 m-0 flex flex-col gap-2;
+}
+
+.footer-menu li a {
+  @apply text-on-dark no-underline transition-colors;
+}
+
+.footer-menu li a:hover {
+  @apply text-accent-on-dark;
+}
+
+.footer-legal-menu {
+  @apply list-none p-0 m-0 flex gap-6;
+}
+
+.footer-legal-menu li a {
+  @apply text-on-dark-subtle no-underline transition-colors;
+}
+
+.footer-legal-menu li a:hover {
+  @apply text-accent-on-dark;
+}

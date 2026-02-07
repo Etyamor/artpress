@@ -1,6 +1,6 @@
 @import "tailwindcss";
+@import "@fortawesome/fontawesome-free/css/fontawesome.css";
+@import "@fortawesome/fontawesome-free/css/solid.css";
 @import "./fonts.css";
-
-html {
-  font-family: 'Roboto', sans-serif;
-}
+@import "./colors.css";
+@import "./custom.css";

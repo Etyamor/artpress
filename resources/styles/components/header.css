@@ -1,0 +1,9 @@
+/* Header */
+
+.site-header {
+  @apply sticky top-0 z-50 w-full bg-white border-b border-border;
+}
+
+.site-header-inner {
+  @apply mx-auto max-w-6xl px-6 flex items-center justify-between h-16;
+}

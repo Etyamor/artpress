@@ -1,0 +1,138 @@
+/* Nav — mobile: fixed overlay; desktop: inline */
+
+.site-nav {
+  @apply fixed inset-0 top-16 z-40 bg-white overflow-y-auto;
+  @apply opacity-0 invisible transition-all duration-200 ease-in-out;
+}
+
+.site-nav.open {
+  @apply opacity-100 visible;
+}
+
+@media (min-width: 1024px) {
+  .site-nav {
+    @apply static opacity-100 visible overflow-visible bg-transparent;
+    transition: none;
+  }
+}
+
+/* Menu list */
+
+.header-menu {
+  @apply list-none m-0 p-0;
+  @apply flex flex-col px-6 pt-4;
+}
+
+@media (min-width: 1024px) {
+  .header-menu {
+    @apply flex-row items-center gap-1 px-0 pt-0;
+  }
+}
+
+/* Top-level links */
+
+.header-menu > li {
+  @apply relative;
+}
+
+.header-menu > li > a {
+  @apply block py-3 text-base font-medium text-foreground-secondary no-underline transition-colors;
+  @apply border-b border-border-subtle;
+}
+
+@media (min-width: 1024px) {
+  .header-menu > li > a {
+    @apply py-2 px-3 text-sm border-none rounded-md;
+  }
+}
+
+.header-menu > li > a:hover {
+  @apply text-accent;
+}
+
+@media (min-width: 1024px) {
+  .header-menu > li > a:hover {
+    @apply bg-accent-subtle;
+  }
+}
+
+.header-menu > li.current-menu-item > a,
+.header-menu > li.current-menu-ancestor > a {
+  @apply text-accent-hover;
+}
+
+/* Parent item chevron */
+
+.header-menu > li.menu-item-has-children > a {
+  @apply flex items-center gap-1.5;
+}
+
+.header-menu > li.menu-item-has-children > a::after {
+  font-family: var(--fa-family-classic);
+  font-weight: 900;
+  content: '\f078';
+  @apply text-[0.6rem] opacity-50 transition-transform duration-150;
+}
+
+@media (min-width: 1024px) {
+  .header-menu > li.menu-item-has-children:hover > a::after {
+    @apply rotate-180 opacity-75;
+  }
+}
+
+/* Sub-menu — mobile: indented list; desktop: absolute dropdown */
+
+.header-menu .sub-menu {
+  @apply list-none m-0 p-0 pl-4 flex flex-col;
+}
+
+.header-menu .sub-menu li a {
+  @apply block px-3 py-2 text-sm text-foreground-muted no-underline rounded-md transition-colors;
+}
+
+@media (min-width: 1024px) {
+  .header-menu .sub-menu {
+    @apply pl-0 p-1 absolute left-0 top-full min-w-48 bg-white border border-border rounded-lg shadow-lg;
+    @apply opacity-0 invisible translate-y-1 transition-all duration-150 ease-in-out;
+  }
+
+  .header-menu > li:hover > .sub-menu {
+    @apply opacity-100 visible translate-y-0;
+  }
+}
+
+.header-menu .sub-menu li a:hover {
+  @apply text-accent;
+}
+
+@media (min-width: 1024px) {
+  .header-menu .sub-menu li a:hover {
+    @apply bg-accent-subtle;
+  }
+}
+
+.header-menu .sub-menu li.current-menu-item > a {
+  @apply text-accent-hover;
+}
+
+/* Burger button */
+
+.burger-button {
+  @apply p-2 text-foreground-secondary rounded-md transition-colors;
+}
+
+.burger-button:hover {
+  @apply text-accent bg-accent-subtle;
+}
+
+.burger-button .close-icon {
+  @apply hidden;
+}
+
+.burger-button.menu-open .burger-icon {
+  @apply hidden;
+}
+
+.burger-button.menu-open .close-icon {
+  @apply block;
+}
