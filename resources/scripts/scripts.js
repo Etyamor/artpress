@@ -9,6 +9,18 @@ if (burger && nav) {
   });
 }
 
+const readingProgress = document.getElementById('reading-progress');
+
+if (readingProgress) {
+  const update = () => {
+    const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
+    readingProgress.style.width = `${pct}%`;
+  };
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+}
+
 const subscribeForm = document.getElementById('subscribe-form');
 
 if (subscribeForm) {

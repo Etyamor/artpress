@@ -1,5 +1,7 @@
 <?php get_header(); ?>
 
+<div id="reading-progress" class="fixed top-0 left-0 h-1 bg-accent z-50 transition-[width] duration-150 ease-out" style="width: 0%"></div>
+
 <main class="max-w-6xl mx-auto px-6 py-10">
     <div class="flex flex-col lg:flex-row lg:items-start gap-10">
         <article class="flex-1 min-w-0">
