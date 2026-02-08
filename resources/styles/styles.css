@@ -4,6 +4,7 @@
 @source "../../inc/**/*.php";
 @import "@fortawesome/fontawesome-free/css/fontawesome.css";
 @import "@fortawesome/fontawesome-free/css/solid.css";
+@import "@fortawesome/fontawesome-free/css/brands.css";
 @import "./fonts.css";
 @import "./colors.css";
 @import "./custom.css";

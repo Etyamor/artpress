@@ -27,15 +27,21 @@
                     <?php the_content(); ?>
                 </div>
 
-                <!-- Tags -->
-                <?php if (has_tag()) : ?>
-                    <footer class="mt-8 pt-6 border-t border-border">
+                <!-- Post footer -->
+                <footer class="mt-8 pt-6 border-t border-border flex flex-col gap-4">
+                    <?php
+                    $general_opts = get_option('artpress_general', []);
+                    if ($general_opts['share_buttons'] ?? true) {
+                        get_template_part('template-parts/single/share-buttons');
+                    }
+                    ?>
+                    <?php if (has_tag()) : ?>
                         <div class="flex flex-wrap items-center gap-2">
                             <span class="text-sm font-medium text-foreground-secondary"><?php esc_html_e('Tags:', 'artpress'); ?></span>
                             <?php the_tags('', '', ''); ?>
                         </div>
-                    </footer>
-                <?php endif; ?>
+                    <?php endif; ?>
+                </footer>
 
             <?php endwhile; ?>
         </article>

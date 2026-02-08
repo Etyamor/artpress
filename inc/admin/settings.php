@@ -3,6 +3,7 @@
  * ArtPress Settings Page
  */
 
+require_once get_template_directory() . '/inc/admin/general.php';
 require_once get_template_directory() . '/inc/admin/smtp.php';
 
 add_action('admin_menu', function () {
@@ -23,13 +24,14 @@ function artpress_settings_page() {
     }
 
     $tabs = [
-        'smtp' => 'SMTP',
+        'general' => 'General',
+        'smtp'    => 'SMTP',
     ];
 
-    $active_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'smtp';
+    $active_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'general';
 
     if (!array_key_exists($active_tab, $tabs)) {
-        $active_tab = 'smtp';
+        $active_tab = 'general';
     }
 
     ?>
@@ -44,6 +46,16 @@ function artpress_settings_page() {
                 </a>
             <?php endforeach; ?>
         </h2>
+
+        <?php if ($active_tab === 'general') : ?>
+            <form method="post" action="options.php">
+                <?php
+                settings_fields('artpress_general');
+                artpress_general_render_fields();
+                submit_button();
+                ?>
+            </form>
+        <?php endif; ?>
 
         <?php if ($active_tab === 'smtp') : ?>
             <form method="post" action="options.php">
