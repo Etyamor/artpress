@@ -1,7 +1,21 @@
 <?php get_header(); ?>
 
 <main class="max-w-6xl mx-auto px-6 py-10">
-    <h1 class="text-3xl font-bold text-foreground mb-8"><?php esc_html_e('Latest Posts', 'artpress'); ?></h1>
+    <h1 class="text-3xl font-bold text-foreground mb-8"><?php
+        if (is_search()) {
+            printf(esc_html__('Search results for: %s', 'artpress'), '<span class="text-accent">' . esc_html(get_search_query()) . '</span>');
+        } elseif (is_category()) {
+            single_cat_title();
+        } elseif (is_tag()) {
+            single_tag_title();
+        } elseif (is_author()) {
+            the_author();
+        } elseif (is_archive()) {
+            the_archive_title();
+        } else {
+            esc_html_e('Latest Posts', 'artpress');
+        }
+    ?></h1>
     <div class="flex flex-col lg:flex-row lg:items-start gap-10">
         <!-- Posts -->
         <div class="flex-1 min-w-0 flex flex-col gap-6">

@@ -1,10 +1,10 @@
 === ArtPress ===
 
 Contributors: Maksym Rutkovskyi
-Requires at least: 6.0
+Requires at least: 6.1
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,11 @@ Yes. The theme includes a sidebar widget area. Go to "Appearance > Widgets" to a
 The newsletter subscribe section is included in the footer by default. Submissions are handled by the theme and delivered to the site owner's admin email.
 
 == Changelog ==
+
+= 1.0.3 =
+* Added search widget styling
+* Disabled Gutenberg per-block inline styles
+* Dynamic page titles for search, category, tag, and archive pages
 
 = 1.0.2 =
 * Improved accessibility

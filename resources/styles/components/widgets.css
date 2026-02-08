@@ -1,5 +1,39 @@
 /* WordPress block widgets in sidebar */
 
+/* Search block */
+
+.wp-block-search__label {
+  @apply sr-only;
+}
+
+.wp-block-search__inside-wrapper {
+  @apply flex;
+}
+
+.wp-block-search__input {
+  @apply flex-1 min-w-0 px-3 py-2 text-sm text-foreground bg-white border border-border rounded-l-md;
+  @apply outline-none transition-colors;
+}
+
+.wp-block-search__input:focus {
+  @apply border-accent;
+}
+
+.wp-block-search__input::placeholder {
+  @apply text-muted;
+}
+
+.wp-block-search__button {
+  @apply px-4 py-2 text-sm font-medium text-white bg-accent border border-accent rounded-r-md;
+  @apply transition-colors cursor-pointer;
+}
+
+.wp-block-search__button:hover {
+  @apply bg-accent-hover border-accent-hover;
+}
+
+/* Categories list */
+
 .wp-block-categories-list {
   @apply list-none m-0 p-0 flex flex-col;
 }

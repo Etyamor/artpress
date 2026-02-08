@@ -18,4 +18,6 @@ add_action('after_setup_theme', function () {
         wp_dequeue_script('jquery-migrate');
         wp_dequeue_script('wp-embed');
     }, 100);
+
+    add_filter('should_load_separate_core_block_assets', '__return_false', 100);
 });
