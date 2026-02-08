@@ -17,11 +17,11 @@
                     name="email"
                     required
                     placeholder="<?php esc_html_e('Your email address', 'artpress'); ?>"
-                    class="px-4 py-3 rounded-l-lg bg-primary-950 text-white placeholder-accent-on-dark border border-accent-hover focus:outline-none focus:border-accent-on-dark w-full md:w-72"
+                    class="px-4 py-3 rounded-l-lg bg-accent-deep text-white placeholder-accent-on-dark border border-accent-hover focus:outline-none focus:border-accent-on-dark w-full md:w-72"
                 >
                 <button
                     type="submit"
-                    class="px-6 py-3 bg-primary-500 hover:bg-accent-on-dark text-white font-semibold rounded-r-lg transition-colors cursor-pointer"
+                    class="px-6 py-3 bg-accent-hover hover:bg-accent text-white font-semibold rounded-r-lg transition-colors cursor-pointer"
                 >
                     <?php esc_html_e('Subscribe', 'artpress'); ?>
                 </button>

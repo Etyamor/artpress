@@ -72,6 +72,8 @@ Fonts and images are imported through CSS, not PHP. Vite parses CSS files to bun
 
 **Always prefer Tailwind utility classes directly in PHP templates.** Only use CSS component files (`resources/styles/components/`) with `@apply` when styling markup that WordPress generates and you cannot control — such as `wp_nav_menu()` output, `the_category()` links, widget internals, or JS-driven state toggles (e.g. `.open`, `.menu-open`). If you can add classes to the HTML element in a template, use Tailwind classes there instead of creating a CSS rule.
 
+**Always use semantic color tokens, never raw palette colors.** In templates and CSS, use the semantic aliases defined in `@theme inline` in `resources/styles/colors.css` (e.g. `bg-accent`, `text-foreground`, `border-surface-dark-border`) — never raw palette classes like `bg-primary-600` or `text-neutral-900`. If no existing semantic token fits, add a new one to the `@theme inline` block in `colors.css` first, then use it.
+
 ## Theme Structure
 
 ### Root Level

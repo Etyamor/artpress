@@ -26,7 +26,7 @@
                             <?php the_excerpt(); ?>
                         </div>
                         <a href="<?php the_permalink(); ?>" class="text-sm font-medium text-accent no-underline hover:text-accent-hover transition-colors">
-                            <?php esc_html_e('Read more', 'artpress'); ?> &rarr;
+                            <?php esc_html_e('Read more', 'artpress'); ?><span class="sr-only">: <?php the_title(); ?></span> &rarr;
                         </a>
                     </div>
                 </article>

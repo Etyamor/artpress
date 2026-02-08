@@ -55,6 +55,7 @@
   --color-accent-light: var(--color-primary-100);
   --color-accent-subtle: var(--color-primary-50);
   --color-accent-foreground: var(--color-primary-900);
+  --color-accent-deep: var(--color-primary-950);
 
   /* Dark surfaces (footer, dark sections) */
   --color-surface-dark: var(--color-neutral-900);
