@@ -4,7 +4,7 @@ Contributors: Maksym Rutkovskyi
 Requires at least: 6.1
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.0.3
+Stable tag: 1.0.5
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -55,6 +55,14 @@ Yes. The theme includes a sidebar widget area. Go to "Appearance > Widgets" to a
 The newsletter subscribe section is included in the footer by default. Submissions are handled by the theme and delivered to the site owner's admin email.
 
 == Changelog ==
+
+= 1.0.5 =
+* Added Ukrainian and Spanish translations
+* Added Node.js-based i18n build scripts (wp-pot, gettext-parser)
+
+= 1.0.4 =
+* Added reading progress bar
+* Added share buttons with admin toggle
 
 = 1.0.3 =
 * Added search widget styling
