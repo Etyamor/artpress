@@ -4,6 +4,7 @@
  */
 
 add_action('after_setup_theme', function () {
+    load_theme_textdomain('artpress', get_template_directory() . '/languages');
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails');
     register_nav_menus([

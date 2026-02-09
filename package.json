@@ -3,18 +3,24 @@
   "version": "1.0.0",
   "scripts": {
     "build": "vite build",
-    "dev": "rimraf ./dist/.vite/manifest.json && vite"
+    "dev": "rimraf ./dist/.vite/manifest.json && vite",
+    "i18n:pot": "node scripts/make-pot.mjs",
+    "i18n:mo": "node scripts/make-mo.mjs",
+    "i18n:sync": "node scripts/sync-po.mjs",
+    "i18n": "npm run i18n:pot && npm run i18n:sync && npm run i18n:mo"
   },
   "devDependencies": {
     "@fontsource/roboto": "^5.2.8",
     "@fortawesome/fontawesome-free": "^7.1.0",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.13",
+    "gettext-parser": "^9.0.1",
     "rimraf": "^6.0.1",
     "sharp": "^0.34.4",
     "svgo": "^4.0.0",
     "tailwindcss": "^4.1.13",
     "vite": "^7.1.6",
-    "vite-plugin-image-optimizer": "^2.0.2"
+    "vite-plugin-image-optimizer": "^2.0.2",
+    "wp-pot": "^2.0.0"
   }
 }
