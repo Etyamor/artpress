@@ -15,11 +15,11 @@ if (! $hero_query->have_posts()) {
     <?php $hero_query->the_post(); ?>
     <!-- Big post (left, 2 cols wide, full height) -->
     <article class="bg-white border border-border rounded-lg overflow-hidden md:col-span-2 md:row-span-2 flex flex-col">
-        <?php if (has_post_thumbnail()) : ?>
-            <a href="<?php the_permalink(); ?>" class="block aspect-16/9 lg:aspect-auto lg:flex-1 overflow-hidden">
-                <?php the_post_thumbnail('large', ['class' => 'w-full h-full object-cover']); ?>
-            </a>
-        <?php endif; ?>
+        <a href="<?php the_permalink(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent to-accent-deep'; ?> aspect-16/9 lg:aspect-auto lg:flex-1 overflow-hidden">
+            <?php if (has_post_thumbnail()) :
+                the_post_thumbnail('large', ['class' => 'w-full h-full object-cover']);
+            endif; ?>
+        </a>
         <div class="p-6">
             <div class="flex items-center gap-2 text-sm text-muted mb-3">
                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
@@ -36,11 +36,11 @@ if (! $hero_query->have_posts()) {
     <?php $hero_query->the_post(); ?>
     <!-- Middle top: image post -->
     <article class="bg-white border border-border rounded-lg overflow-hidden">
-        <?php if (has_post_thumbnail()) : ?>
-            <a href="<?php the_permalink(); ?>" class="block aspect-16/9 overflow-hidden">
-                <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']); ?>
-            </a>
-        <?php endif; ?>
+        <a href="<?php the_permalink(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent to-accent-deep'; ?> aspect-16/9 overflow-hidden">
+            <?php if (has_post_thumbnail()) :
+                the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']);
+            endif; ?>
+        </a>
         <div class="p-4">
             <div class="flex items-center gap-2 text-xs text-muted mb-1">
                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
@@ -57,11 +57,11 @@ if (! $hero_query->have_posts()) {
     <?php $hero_query->the_post(); ?>
     <!-- Right top: image post -->
     <article class="bg-white border border-border rounded-lg overflow-hidden">
-        <?php if (has_post_thumbnail()) : ?>
-            <a href="<?php the_permalink(); ?>" class="block aspect-16/9 overflow-hidden">
-                <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']); ?>
-            </a>
-        <?php endif; ?>
+        <a href="<?php the_permalink(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent to-accent-deep'; ?> aspect-16/9 overflow-hidden">
+            <?php if (has_post_thumbnail()) :
+                the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']);
+            endif; ?>
+        </a>
         <div class="p-4">
             <div class="flex items-center gap-2 text-xs text-muted mb-1">
                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>

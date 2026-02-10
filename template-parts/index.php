@@ -57,7 +57,7 @@
                     <article class="bg-white border border-border rounded-lg overflow-hidden<?php echo !$is_home ? ' md:flex md:flex-row' : ''; ?>">
                         <?php if (has_post_thumbnail()) : ?>
                             <a href="<?php the_permalink(); ?>" class="block aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
-                                <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover']); ?>
+                                <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover', 'loading' => 'lazy']); ?>
                             </a>
                         <?php endif; ?>
                         <div class="p-5 flex-1 min-w-0">

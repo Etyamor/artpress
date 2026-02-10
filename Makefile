@@ -10,7 +10,7 @@ build:
 zip: build
 	@rm -rf $(THEME_NAME) $(THEME_NAME)-$(VERSION).zip
 	mkdir $(THEME_NAME)
-	cp style.css functions.php header.php footer.php index.php single.php screenshot.png $(THEME_NAME)/
+	cp style.css functions.php header.php footer.php index.php singular.php screenshot.png $(THEME_NAME)/
 	cp -r inc template-parts dist languages $(THEME_NAME)/
 	zip -r $(THEME_NAME)-$(VERSION).zip $(THEME_NAME)/ -x "*.DS_Store"
 	rm -rf $(THEME_NAME)
