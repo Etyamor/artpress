@@ -12,9 +12,9 @@
 
         <!-- Navigation -->
         <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer menu', 'artpress'); ?>">
-            <h4 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
+            <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
                 <?php esc_html_e('Menu', 'artpress'); ?>
-            </h4>
+            </h3>
             <?php
             wp_nav_menu([
                 'theme_location' => 'footer',
@@ -28,9 +28,9 @@
 
         <!-- Categories -->
         <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer categories', 'artpress'); ?>">
-            <h4 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
+            <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
                 <?php esc_html_e('Categories', 'artpress'); ?>
-            </h4>
+            </h3>
             <?php
             wp_nav_menu([
                 'theme_location' => 'footer_categories',

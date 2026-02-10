@@ -55,7 +55,7 @@
 
                 <?php while (have_posts()) : the_post(); ?>
                     <article class="bg-white border border-border rounded-lg overflow-hidden<?php echo !$is_home ? ' md:flex md:flex-row' : ''; ?>">
-                        <a href="<?php the_permalink(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent via-accent-deep to-accent bg-[length:200%_200%] hover:bg-[position:100%_100%] transition-[background-position] duration-500'; ?> aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
+                        <a href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent via-accent-deep to-accent bg-[length:200%_200%] hover:bg-[position:100%_100%] transition-[background-position] duration-500'; ?> aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
                             <?php if (has_post_thumbnail()) :
                                 the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover transition-transform duration-300 hover:scale-105', 'loading' => 'lazy']);
                             endif; ?>

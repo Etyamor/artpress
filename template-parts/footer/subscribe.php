@@ -1,9 +1,9 @@
 <div class="bg-accent-foreground">
     <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
-            <h3 class="text-xl font-bold text-white">
+            <h2 class="text-xl font-bold text-white">
                 <?php esc_html_e('Subscribe to our newsletter', 'artpress'); ?>
-            </h3>
+            </h2>
             <p class="text-accent-light mt-1">
                 <?php esc_html_e('Get the latest posts delivered straight to your inbox.', 'artpress'); ?>
             </p>
