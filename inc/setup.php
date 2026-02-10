@@ -45,17 +45,3 @@ add_action('widgets_init', function () {
 add_filter('excerpt_more', function () {
     return '&hellip;';
 });
-
-/**
- * Get estimated reading time for a post.
- */
-function artpress_reading_time($post_id = null) {
-    $content = get_post_field('post_content', $post_id);
-    $words   = str_word_count(wp_strip_all_tags($content));
-    $minutes = max(1, (int) ceil($words / 200));
-
-    return sprintf(
-        _n('%d min read', '%d min read', $minutes, 'artpress'),
-        $minutes
-    );
-}

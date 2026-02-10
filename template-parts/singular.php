@@ -15,8 +15,6 @@
                             <span>&middot;</span>
                             <span class="post-card-category"><?php the_category(', '); ?></span>
                         <?php endif; ?>
-                        <span>&middot;</span>
-                        <span><?php echo esc_html(artpress_reading_time()); ?></span>
                     </div>
                     <h1 class="text-3xl font-bold text-foreground mb-4"><?php the_title(); ?></h1>
                     <?php if (has_post_thumbnail()) : ?>
