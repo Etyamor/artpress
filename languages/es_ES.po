@@ -67,24 +67,28 @@ msgstr "¡Gracias por suscribirte!"
 msgid "Something went wrong. Please try again."
 msgstr "Algo salió mal. Por favor, inténtalo de nuevo."
 
-#: template-parts/index.php:16
+#: template-parts/index.php:9
+msgid " — Page %d"
+msgstr " — Página %d"
+
+#: template-parts/index.php:28
 msgid "Latest Posts"
 msgstr "Últimas publicaciones"
 
-#: template-parts/index.php:6
+#: template-parts/index.php:13
 #, php-format
 msgid "Search results for: %s"
 msgstr "Resultados de búsqueda para: %s"
 
-#: template-parts/index.php:50
+#: template-parts/index.php:92
 msgid "No posts found."
 msgstr "No se encontraron publicaciones."
 
-#: template-parts/index.php:43
+#: template-parts/index.php:77
 msgid "Read more"
 msgstr "Leer más"
 
-#: template-parts/single.php:42
+#: template-parts/singular.php:42
 msgid "Tags:"
 msgstr "Etiquetas:"
 

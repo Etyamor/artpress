@@ -55,11 +55,11 @@
 
                 <?php while (have_posts()) : the_post(); ?>
                     <article class="bg-white border border-border rounded-lg overflow-hidden<?php echo !$is_home ? ' md:flex md:flex-row' : ''; ?>">
-                        <?php if (has_post_thumbnail()) : ?>
-                            <a href="<?php the_permalink(); ?>" class="block aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
-                                <?php the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover', 'loading' => 'lazy']); ?>
-                            </a>
-                        <?php endif; ?>
+                        <a href="<?php the_permalink(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent via-accent-deep to-accent bg-[length:200%_200%] hover:bg-[position:100%_100%] transition-[background-position] duration-500'; ?> aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
+                            <?php if (has_post_thumbnail()) :
+                                the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover transition-transform duration-300 hover:scale-105', 'loading' => 'lazy']);
+                            endif; ?>
+                        </a>
                         <div class="p-5 flex-1 min-w-0">
                             <div class="flex items-center gap-2 text-sm text-muted mb-2">
                                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
@@ -67,10 +67,10 @@
                                     <span class="post-card-category"><?php the_category(', '); ?></span>
                                 <?php endif; ?>
                             </div>
-                            <h2 class="text-lg font-semibold text-foreground mb-2">
+                            <h2 class="text-lg font-semibold text-foreground mb-2 line-clamp-2">
                                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
                             </h2>
-                            <div class="text-foreground-muted text-sm leading-relaxed mb-3 [&_p]:m-0">
+                            <div class="text-foreground-muted text-sm leading-relaxed mb-3 line-clamp-3 [&_p]:m-0">
                                 <?php the_excerpt(); ?>
                             </div>
                             <a href="<?php the_permalink(); ?>" class="text-sm font-medium text-accent no-underline hover:text-accent-hover transition-colors">

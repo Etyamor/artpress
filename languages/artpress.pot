@@ -11,7 +11,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/artpress\n"
 "Last-Translator: Maksym Rutkovskyi\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
@@ -61,23 +60,27 @@ msgstr ""
 msgid "Something went wrong. Please try again."
 msgstr ""
 
-#: template-parts/index.php:16
+#: template-parts/index.php:9
+msgid " — Page %d"
+msgstr ""
+
+#: template-parts/index.php:28
 msgid "Latest Posts"
 msgstr ""
 
-#: template-parts/index.php:6
+#: template-parts/index.php:13
 msgid "Search results for: %s"
 msgstr ""
 
-#: template-parts/index.php:50
+#: template-parts/index.php:92
 msgid "No posts found."
 msgstr ""
 
-#: template-parts/index.php:43
+#: template-parts/index.php:77
 msgid "Read more"
 msgstr ""
 
-#: template-parts/single.php:42
+#: template-parts/singular.php:42
 msgid "Tags:"
 msgstr ""
 

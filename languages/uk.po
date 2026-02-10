@@ -68,24 +68,28 @@ msgstr "Дякуємо за підписку!"
 msgid "Something went wrong. Please try again."
 msgstr "Щось пішло не так. Спробуйте ще раз."
 
-#: template-parts/index.php:16
+#: template-parts/index.php:9
+msgid " — Page %d"
+msgstr " — Сторінка %d"
+
+#: template-parts/index.php:28
 msgid "Latest Posts"
 msgstr "Останні публікації"
 
-#: template-parts/index.php:6
+#: template-parts/index.php:13
 #, php-format
 msgid "Search results for: %s"
 msgstr "Результати пошуку для: %s"
 
-#: template-parts/index.php:50
+#: template-parts/index.php:92
 msgid "No posts found."
 msgstr "Публікацій не знайдено."
 
-#: template-parts/index.php:43
+#: template-parts/index.php:77
 msgid "Read more"
 msgstr "Читати далі"
 
-#: template-parts/single.php:42
+#: template-parts/singular.php:42
 msgid "Tags:"
 msgstr "Теги:"
 
