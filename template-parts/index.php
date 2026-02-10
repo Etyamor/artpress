@@ -66,6 +66,8 @@
                                 <?php if (has_category()) : ?>
                                     <span class="post-card-category"><?php the_category(', '); ?></span>
                                 <?php endif; ?>
+                                <span>&middot;</span>
+                                <span><?php echo esc_html(artpress_reading_time()); ?></span>
                             </div>
                             <h2 class="text-lg font-semibold text-foreground mb-2 line-clamp-2">
                                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>

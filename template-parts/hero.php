@@ -26,6 +26,8 @@ if (! $hero_query->have_posts()) {
                 <?php $cats = get_the_category(); if (!empty($cats)) : ?>
                     <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                 <?php endif; ?>
+                <span>&middot;</span>
+                <span><?php echo esc_html(artpress_reading_time()); ?></span>
             </div>
             <h2 class="text-2xl font-semibold text-foreground lg:line-clamp-2">
                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
@@ -47,6 +49,8 @@ if (! $hero_query->have_posts()) {
                 <?php $cats = get_the_category(); if (!empty($cats)) : ?>
                     <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                 <?php endif; ?>
+                <span>&middot;</span>
+                <span><?php echo esc_html(artpress_reading_time()); ?></span>
             </div>
             <h2 class="text-base font-semibold text-foreground lg:line-clamp-2">
                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
@@ -66,8 +70,10 @@ if (! $hero_query->have_posts()) {
             <div class="flex items-center gap-2 text-sm text-muted mb-1">
                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
                 <?php $cats = get_the_category(); if (!empty($cats)) : ?>
-                    <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors py-1"><?php echo esc_html($cats[0]->name); ?></a>
+                    <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                 <?php endif; ?>
+                <span>&middot;</span>
+                <span><?php echo esc_html(artpress_reading_time()); ?></span>
             </div>
             <h2 class="text-base font-semibold text-foreground lg:line-clamp-2">
                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
@@ -85,6 +91,8 @@ if (! $hero_query->have_posts()) {
                         <?php $cats = get_the_category(); if (!empty($cats)) : ?>
                             <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                         <?php endif; ?>
+                        <span>&middot;</span>
+                        <span><?php echo esc_html(artpress_reading_time()); ?></span>
                     </div>
                     <h2 class="text-sm font-semibold text-foreground leading-snug lg:line-clamp-2">
                         <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
