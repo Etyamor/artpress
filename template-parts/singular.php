@@ -11,10 +11,12 @@
                 <header class="mb-8">
                     <div class="flex items-center gap-2 text-sm text-muted mb-3">
                         <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
-                        <?php if (has_category()) : ?>
+                        <?php $cats = get_the_category(); if (!empty($cats)) : ?>
                             <span>&middot;</span>
-                            <span class="post-card-category"><?php the_category(', '); ?></span>
+                            <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                         <?php endif; ?>
+                        <span>&middot;</span>
+                        <span class="inline-flex items-center gap-1"><i class="fa-solid fa-clock text-xs"></i> <?php echo esc_html(artpress_reading_time()); ?></span>
                     </div>
                     <h1 class="text-3xl font-bold text-foreground mb-4"><?php the_title(); ?></h1>
                     <?php if (has_post_thumbnail()) : ?>

@@ -63,9 +63,10 @@
                         <div class="p-5 flex-1 min-w-0">
                             <div class="flex items-center gap-2 text-sm text-muted mb-2">
                                 <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
-                                <?php if (has_category()) : ?>
-                                    <span class="post-card-category"><?php the_category(', '); ?></span>
+                                <?php $cats = get_the_category(); if (!empty($cats)) : ?>
+                                    <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
                                 <?php endif; ?>
+                                <span class="inline-flex items-center gap-1"><i class="fa-solid fa-clock text-xs"></i> <?php echo esc_html(artpress_reading_time()); ?></span>
                             </div>
                             <h2 class="text-lg font-semibold text-foreground mb-2 line-clamp-2">
                                 <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>

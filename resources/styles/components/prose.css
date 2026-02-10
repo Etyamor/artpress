@@ -1,0 +1,62 @@
+/* Prose overrides — theme semantic tokens instead of Tailwind Typography defaults */
+
+.prose {
+  @apply text-foreground-secondary;
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6, th, strong) {
+  @apply text-foreground;
+}
+
+.prose :where(a) {
+  @apply text-accent no-underline font-medium transition-colors;
+}
+
+.prose :where(a):hover {
+  @apply text-accent-hover;
+}
+
+.prose :where(blockquote) {
+  @apply text-foreground-muted border-border not-italic;
+}
+
+.prose :where(hr) {
+  @apply border-border;
+}
+
+.prose :where(ol > li)::marker {
+  @apply text-muted;
+}
+
+.prose :where(ul > li)::marker {
+  @apply text-muted;
+}
+
+.prose :where(code) {
+  @apply text-accent-foreground bg-accent-subtle px-1.5 py-0.5 rounded font-normal;
+}
+
+.prose :where(code)::before,
+.prose :where(code)::after {
+  content: none;
+}
+
+.prose :where(pre) {
+  @apply bg-surface-dark text-on-dark border border-surface-dark-border;
+}
+
+.prose :where(pre code) {
+  @apply bg-transparent text-inherit p-0;
+}
+
+.prose :where(figcaption) {
+  @apply text-muted;
+}
+
+.prose :where(thead th) {
+  @apply border-border;
+}
+
+.prose :where(tbody td, tfoot td) {
+  @apply border-border-subtle;
+}

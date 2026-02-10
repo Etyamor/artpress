@@ -115,16 +115,6 @@
   @apply block;
 }
 
-/* Category links (WP output from the_category()) */
-
-.post-card-category a {
-  @apply text-accent no-underline;
-}
-
-.post-card-category a:hover {
-  @apply text-accent-hover;
-}
-
 /* Post tags (WP output from the_tags()) */
 
 [rel="tag"] {
