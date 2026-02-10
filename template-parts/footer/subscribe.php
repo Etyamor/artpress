@@ -1,3 +1,9 @@
+<?php
+$general_opts = get_option('artpress_general', []);
+if (! ($general_opts['subscribe_section'] ?? true)) {
+    return;
+}
+?>
 <div class="bg-accent-foreground">
     <div class="max-w-6xl mx-auto px-6 py-12 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>

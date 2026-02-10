@@ -9,15 +9,11 @@
 
                 <!-- Header -->
                 <header class="mb-8">
-                    <div class="flex items-center gap-2 text-sm text-muted mb-3">
-                        <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
-                        <?php $cats = get_the_category(); if (!empty($cats)) : ?>
-                            <span>&middot;</span>
-                            <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
-                        <?php endif; ?>
-                        <span>&middot;</span>
-                        <span class="inline-flex items-center gap-1"><i class="fa-solid fa-clock text-xs"></i> <?php echo esc_html(artpress_reading_time()); ?></span>
-                    </div>
+                    <?php artpress_post_meta([
+                        'class'        => 'flex items-center gap-2 text-sm text-muted mb-3',
+                        'separator'    => 'middot',
+                        'reading_time' => true,
+                    ]); ?>
                     <h1 class="text-3xl font-bold text-foreground mb-4"><?php the_title(); ?></h1>
                     <?php if (has_post_thumbnail()) : ?>
                         <div class="rounded-lg overflow-hidden mb-6">
@@ -54,5 +50,7 @@
         <?php get_template_part('template-parts/sidebar'); ?>
     </div>
 </main>
+
+<?php get_template_part( 'template-parts/single/related-posts' ); ?>
 
 <?php get_footer(); ?>

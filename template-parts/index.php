@@ -54,31 +54,7 @@
                 <?php endif; ?>
 
                 <?php while (have_posts()) : the_post(); ?>
-                    <article class="bg-white border border-border rounded-lg overflow-hidden<?php echo !$is_home ? ' md:flex md:flex-row' : ''; ?>">
-                        <a href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>" class="<?php echo has_post_thumbnail() ? 'block' : 'hidden md:block bg-gradient-to-br from-accent via-accent-deep to-accent bg-[length:200%_200%] hover:bg-[position:100%_100%] transition-[background-position] duration-500'; ?> aspect-<?php echo $is_home ? '16/9' : '4/3'; ?> overflow-hidden<?php echo !$is_home ? ' md:w-72 md:shrink-0' : ''; ?>">
-                            <?php if (has_post_thumbnail()) :
-                                the_post_thumbnail('medium_large', ['class' => 'w-full h-full object-cover transition-transform duration-300 hover:scale-105', 'loading' => 'lazy']);
-                            endif; ?>
-                        </a>
-                        <div class="p-5 flex-1 min-w-0">
-                            <div class="flex items-center gap-2 text-sm text-muted mb-2">
-                                <time datetime="<?php echo get_the_date('c'); ?>"><?php echo get_the_date(); ?></time>
-                                <?php $cats = get_the_category(); if (!empty($cats)) : ?>
-                                    <a href="<?php echo esc_url(get_category_link($cats[0]->term_id)); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html($cats[0]->name); ?></a>
-                                <?php endif; ?>
-                                <span class="inline-flex items-center gap-1"><i class="fa-solid fa-clock text-xs"></i> <?php echo esc_html(artpress_reading_time()); ?></span>
-                            </div>
-                            <h2 class="text-lg font-semibold text-foreground mb-2 line-clamp-2">
-                                <a href="<?php the_permalink(); ?>" class="no-underline text-foreground hover:text-accent transition-colors"><?php the_title(); ?></a>
-                            </h2>
-                            <div class="text-foreground-muted text-sm leading-relaxed mb-3 line-clamp-3 [&_p]:m-0">
-                                <?php the_excerpt(); ?>
-                            </div>
-                            <a href="<?php the_permalink(); ?>" class="text-sm font-medium text-accent no-underline hover:text-accent-hover transition-colors">
-                                <?php esc_html_e('Read more', 'artpress'); ?><span class="sr-only">: <?php the_title(); ?></span> &rarr;
-                            </a>
-                        </div>
-                    </article>
+                    <?php get_template_part('template-parts/post-card', null, ['is_home' => $is_home]); ?>
                 <?php endwhile; ?>
 
                 </div>

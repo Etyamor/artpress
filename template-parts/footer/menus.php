@@ -10,36 +10,40 @@
             </p>
         </div>
 
-        <!-- Navigation -->
-        <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer menu', 'artpress'); ?>">
-            <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
-                <?php esc_html_e('Menu', 'artpress'); ?>
-            </h3>
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'footer',
-                'container'      => false,
-                'menu_class'     => 'footer-menu',
-                'depth'          => 1,
-                'fallback_cb'    => false,
-            ]);
-            ?>
-        </nav>
+        <?php if (has_nav_menu('footer')) : ?>
+            <!-- Navigation -->
+            <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer menu', 'artpress'); ?>">
+                <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
+                    <?php esc_html_e('Menu', 'artpress'); ?>
+                </h3>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'footer',
+                    'container'      => false,
+                    'menu_class'     => 'footer-menu',
+                    'depth'          => 1,
+                    'fallback_cb'    => false,
+                ]);
+                ?>
+            </nav>
+        <?php endif; ?>
 
-        <!-- Categories -->
-        <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer categories', 'artpress'); ?>">
-            <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
-                <?php esc_html_e('Categories', 'artpress'); ?>
-            </h3>
-            <?php
-            wp_nav_menu([
-                'theme_location' => 'footer_categories',
-                'container'      => false,
-                'menu_class'     => 'footer-menu',
-                'depth'          => 1,
-                'fallback_cb'    => false,
-            ]);
-            ?>
-        </nav>
+        <?php if (has_nav_menu('footer_categories')) : ?>
+            <!-- Categories -->
+            <nav class="footer-nav" aria-label="<?php esc_attr_e('Footer categories', 'artpress'); ?>">
+                <h3 class="text-sm font-semibold text-on-dark-heading uppercase tracking-wider mb-4">
+                    <?php esc_html_e('Categories', 'artpress'); ?>
+                </h3>
+                <?php
+                wp_nav_menu([
+                    'theme_location' => 'footer_categories',
+                    'container'      => false,
+                    'menu_class'     => 'footer-menu',
+                    'depth'          => 1,
+                    'fallback_cb'    => false,
+                ]);
+                ?>
+            </nav>
+        <?php endif; ?>
     </div>
 </div>
