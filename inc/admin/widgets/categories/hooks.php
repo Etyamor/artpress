@@ -8,16 +8,17 @@ add_filter('render_block', function ($html, $block) {
         return $html;
     }
 
-    $opts  = get_option('artpress_widgets', []);
-    $limit = $opts['category_limit'] ?? '';
+    $opts    = get_option('artpress_widgets', []);
+    $limit   = $opts['category_limit'] ?? '';
+    $orderby = $opts['category_orderby'] ?? 'name';
 
     if ($limit === '' || $limit < 1) {
         return $html;
     }
 
     $cats = get_categories([
-        'orderby' => 'name',
-        'order'   => 'ASC',
+        'orderby' => $orderby,
+        'order'   => $orderby === 'count' ? 'DESC' : 'ASC',
         'number'  => (int) $limit,
     ]);
 

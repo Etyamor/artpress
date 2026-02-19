@@ -27,6 +27,10 @@ function artpress_widgets_sanitize($input) {
     $limit = $input['category_limit'] ?? '';
     $clean['category_limit'] = $limit !== '' ? absint($limit) : '';
 
+    $clean['category_orderby'] = in_array($input['category_orderby'] ?? '', ['name', 'count'], true)
+        ? $input['category_orderby']
+        : 'name';
+
     $clean['search_title']   = !empty($input['search_title']);
     $clean['search_content'] = !empty($input['search_content']);
     $clean['search_excerpt'] = !empty($input['search_excerpt']);
