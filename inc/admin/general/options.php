@@ -19,5 +19,10 @@ function artpress_general_sanitize($input) {
     $clean['share_x']           = !empty($input['share_x']);
     $clean['share_linkedin']    = !empty($input['share_linkedin']);
 
+    $clean['infinite_article']       = !empty($input['infinite_article']);
+    $clean['infinite_article_limit'] = isset($input['infinite_article_limit'])
+        ? max(1, min(20, intval($input['infinite_article_limit'])))
+        : 5;
+
     return $clean;
 }

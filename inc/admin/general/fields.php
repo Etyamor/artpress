@@ -6,11 +6,13 @@
 function artpress_general_render_fields() {
     $opts = get_option('artpress_general', []);
 
-    $subscribe_section = $opts['subscribe_section'] ?? true;
-    $share_buttons     = $opts['share_buttons'] ?? true;
-    $share_facebook    = $opts['share_facebook'] ?? true;
-    $share_x           = $opts['share_x'] ?? true;
-    $share_linkedin    = $opts['share_linkedin'] ?? true;
+    $subscribe_section      = $opts['subscribe_section'] ?? true;
+    $share_buttons          = $opts['share_buttons'] ?? true;
+    $share_facebook         = $opts['share_facebook'] ?? true;
+    $share_x                = $opts['share_x'] ?? true;
+    $share_linkedin         = $opts['share_linkedin'] ?? true;
+    $infinite_article       = $opts['infinite_article'] ?? false;
+    $infinite_article_limit = $opts['infinite_article_limit'] ?? 5;
 
     ?>
     <table class="form-table">
@@ -42,6 +44,21 @@ function artpress_general_render_fields() {
                     <label style="display: block; margin-bottom: 4px;">
                         <input type="checkbox" name="artpress_general[share_linkedin]" value="1" <?php checked($share_linkedin); ?>>
                         LinkedIn
+                    </label>
+                </fieldset>
+            </td>
+        </tr>
+        <tr>
+            <th scope="row">Infinite Article</th>
+            <td>
+                <label>
+                    <input type="checkbox" name="artpress_general[infinite_article]" value="1" <?php checked($infinite_article); ?>>
+                    Auto-load next posts when scrolling on single posts
+                </label>
+                <fieldset style="margin-top: 10px; padding-left: 24px;">
+                    <label>
+                        Max posts to load:
+                        <input type="number" name="artpress_general[infinite_article_limit]" value="<?php echo esc_attr($infinite_article_limit); ?>" min="1" max="20" style="width: 60px;">
                     </label>
                 </fieldset>
             </td>

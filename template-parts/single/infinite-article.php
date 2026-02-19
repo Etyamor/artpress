@@ -1,21 +1,14 @@
 <?php
-get_header();
-
-$general_opts      = get_option('artpress_general', []);
-$infinite_enabled  = $general_opts['infinite_article'] ?? false;
+/**
+ * Infinite Article — Partial for a single AJAX-loaded post.
+ * Mirrors the markup in singular.php but without header/footer.
+ */
 ?>
-
-<div id="reading-progress" class="fixed top-0 left-0 h-1 bg-accent z-50 transition-[width] duration-150 ease-out" style="width: 0%"></div>
-
-<?php if ($infinite_enabled) : ?>
-<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-title="<?php echo esc_attr(wp_get_document_title()); ?>">
-<?php endif; ?>
-
-<main class="max-w-6xl mx-auto px-6 py-10">
-    <div class="flex flex-col lg:flex-row lg:items-start gap-10">
-        <article class="flex-1 min-w-0">
-            <?php while (have_posts()) : the_post(); ?>
-
+<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-title="<?php echo esc_attr(get_the_title() . ' - ' . get_bloginfo('name')); ?>">
+    <hr class="max-w-6xl mx-auto border-border" />
+    <main class="max-w-6xl mx-auto px-6 py-10">
+        <div class="flex flex-col lg:flex-row lg:items-start gap-10">
+            <article class="flex-1 min-w-0">
                 <!-- Header -->
                 <header class="mb-8">
                     <?php artpress_post_meta([
@@ -39,6 +32,7 @@ $infinite_enabled  = $general_opts['infinite_article'] ?? false;
                 <!-- Post footer -->
                 <footer class="mt-8 pt-6 border-t border-border flex flex-col gap-4">
                     <?php
+                    $general_opts = get_option('artpress_general', []);
                     if ($general_opts['share_buttons'] ?? true) {
                         get_template_part('template-parts/single/share-buttons');
                     }
@@ -50,22 +44,12 @@ $infinite_enabled  = $general_opts['infinite_article'] ?? false;
                         </div>
                     <?php endif; ?>
                 </footer>
+            </article>
 
-            <?php endwhile; ?>
-        </article>
+            <!-- Sidebar -->
+            <?php get_template_part('template-parts/sidebar'); ?>
+        </div>
+    </main>
 
-        <!-- Sidebar -->
-        <?php get_template_part('template-parts/sidebar'); ?>
-    </div>
-</main>
-
-<?php get_template_part('template-parts/single/related-posts'); ?>
-
-<?php if ($infinite_enabled) : ?>
-</div><!-- .infinite-article -->
-
-<div id="infinite-article-container"></div>
-<div id="infinite-article-trigger"></div>
-<?php endif; ?>
-
-<?php get_footer(); ?>
+    <?php get_template_part('template-parts/single/related-posts'); ?>
+</div>
