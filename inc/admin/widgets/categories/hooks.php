@@ -26,16 +26,24 @@ add_filter('render_block', function ($html, $block) {
         return $html;
     }
 
+    $current_cat = get_queried_object();
+    $current_id  = ($current_cat instanceof WP_Term) ? $current_cat->term_id : 0;
+
     $items = '';
     foreach ($cats as $cat) {
-        $url   = esc_url(get_category_link($cat));
-        $name  = esc_html($cat->name);
-        $count = $cat->count;
+        $url     = esc_url(get_category_link($cat));
+        $name    = esc_html($cat->name);
+        $count   = $cat->count;
+        $classes = 'cat-item cat-item-' . $cat->term_id;
+
+        if ($cat->term_id === $current_id) {
+            $classes .= ' current-cat';
+        }
 
         if (!empty($block['attrs']['showPostCounts'])) {
-            $items .= '<li class="cat-item cat-item-' . $cat->term_id . '"><a href="' . $url . '">' . $name . '</a> <span class="wp-block-categories__post-count">(' . $count . ')</span></li>';
+            $items .= '<li class="' . $classes . '"><a href="' . $url . '">' . $name . '</a> <span class="wp-block-categories__post-count">(' . $count . ')</span></li>';
         } else {
-            $items .= '<li class="cat-item cat-item-' . $cat->term_id . '"><a href="' . $url . '">' . $name . '</a></li>';
+            $items .= '<li class="' . $classes . '"><a href="' . $url . '">' . $name . '</a></li>';
         }
     }
 
