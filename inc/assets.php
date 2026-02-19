@@ -25,6 +25,9 @@ if (!$vite_is_production) {
 add_action('wp_enqueue_scripts', function() use ($vite_is_production) {
     $theme_version = wp_get_theme()->get('Version');
 
+    // Track JS handles that need type="module"
+    $module_handles = [];
+
     if ($vite_is_production) {
         // Production: Load from manifest
         $manifest = json_decode(file_get_contents(VITE_THEME_MANIFEST_PATH), true);
@@ -37,23 +40,28 @@ add_action('wp_enqueue_scripts', function() use ($vite_is_production) {
                     wp_enqueue_style($handle, VITE_THEME_ASSETS_DIR . '/' . $file, [], $theme_version);
                 } elseif ($ext === 'js') {
                     wp_enqueue_script($handle, VITE_THEME_ASSETS_DIR . '/' . $file, [], $theme_version, true);
+                    $module_handles[] = $handle;
                 }
             }
         }
     } else {
         // Development: Load from Vite dev server
         wp_enqueue_script('vite-client', VITE_THEME_DEV_CLIENT_PATH, [], null, true);
-
-        add_filter('script_loader_tag', function ($tag, $handle) {
-            if ($handle === 'vite-client' || $handle === 'theme-scripts') {
-                return str_replace('<script ', '<script type="module" ', $tag);
-            }
-            return $tag;
-        }, 10, 2);
+        $module_handles[] = 'vite-client';
 
         wp_enqueue_script('theme-scripts', VITE_THEME_DEV_SCRIPTS_PATH, [], null, true);
+        $module_handles[] = 'theme-scripts';
+
         wp_enqueue_style('theme-styles', VITE_THEME_DEV_STYLES_PATH, [], null);
     }
+
+    // Add type="module" to all Vite JS scripts (isolates scope, prevents global conflicts)
+    add_filter('script_loader_tag', function ($tag, $handle) use ($module_handles) {
+        if (in_array($handle, $module_handles, true)) {
+            return str_replace('<script ', '<script type="module" ', $tag);
+        }
+        return $tag;
+    }, 10, 2);
 
     // Infinite article data for single posts
     if (is_singular('post')) {
