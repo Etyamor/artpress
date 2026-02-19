@@ -10,7 +10,7 @@ $general_opts = get_option('artpress_general', []);
            target="_blank" rel="noopener noreferrer"
            aria-label="<?php esc_attr_e('Share on Facebook', 'artpress'); ?>"
            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-border text-muted hover:bg-accent hover:text-white hover:border-accent transition-colors">
-            <i class="fa-brands fa-facebook-f text-sm"></i>
+            <?php get_template_part('template-parts/icons/facebook'); ?>
         </a>
     <?php endif; ?>
     <?php if ($general_opts['share_x'] ?? true) : ?>
@@ -18,7 +18,7 @@ $general_opts = get_option('artpress_general', []);
            target="_blank" rel="noopener noreferrer"
            aria-label="<?php esc_attr_e('Share on X', 'artpress'); ?>"
            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-border text-muted hover:bg-accent hover:text-white hover:border-accent transition-colors">
-            <i class="fa-brands fa-x-twitter text-sm"></i>
+            <?php get_template_part('template-parts/icons/x-twitter'); ?>
         </a>
     <?php endif; ?>
     <?php if ($general_opts['share_linkedin'] ?? true) : ?>
@@ -26,7 +26,7 @@ $general_opts = get_option('artpress_general', []);
            target="_blank" rel="noopener noreferrer"
            aria-label="<?php esc_attr_e('Share on LinkedIn', 'artpress'); ?>"
            class="inline-flex items-center justify-center w-8 h-8 rounded-full border border-border text-muted hover:bg-accent hover:text-white hover:border-accent transition-colors">
-            <i class="fa-brands fa-linkedin-in text-sm"></i>
+            <?php get_template_part('template-parts/icons/linkedin'); ?>
         </a>
     <?php endif; ?>
 </div>

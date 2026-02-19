@@ -1,36 +1,7 @@
 <?php
 /**
- * ArtPress SMTP Settings
+ * ArtPress SMTP Settings – Field Rendering
  */
-
-add_action('admin_init', function () {
-    register_setting('artpress_smtp', 'artpress_smtp', [
-        'type'              => 'array',
-        'sanitize_callback' => 'artpress_smtp_sanitize',
-    ]);
-});
-
-function artpress_smtp_sanitize($input) {
-    $clean = [];
-
-    $clean['enabled']    = !empty($input['enabled']);
-    $clean['host']       = sanitize_text_field($input['host'] ?? '');
-    $clean['port']       = absint($input['port'] ?? 587);
-    $clean['encryption'] = in_array($input['encryption'] ?? '', ['none', 'ssl', 'tls'], true)
-        ? $input['encryption']
-        : 'tls';
-    $clean['auth']       = !empty($input['auth']);
-    $clean['username']   = sanitize_text_field($input['username'] ?? '');
-    $clean['password']   = $input['password'] ?? '';
-    $clean['from_email'] = sanitize_email($input['from_email'] ?? '');
-    $clean['from_name']  = sanitize_text_field($input['from_name'] ?? '');
-
-    if ($clean['port'] < 1 || $clean['port'] > 65535) {
-        $clean['port'] = 587;
-    }
-
-    return $clean;
-}
 
 function artpress_smtp_render_fields() {
     $opts = get_option('artpress_smtp', []);
@@ -44,6 +15,7 @@ function artpress_smtp_render_fields() {
     $password   = $opts['password'] ?? '';
     $from_email = $opts['from_email'] ?? '';
     $from_name  = $opts['from_name'] ?? '';
+    $reply_to   = $opts['reply_to'] ?? '';
 
     ?>
     <table class="form-table">
@@ -120,33 +92,15 @@ function artpress_smtp_render_fields() {
                        value="<?php echo esc_attr($from_name); ?>" class="regular-text">
             </td>
         </tr>
+        <tr>
+            <th scope="row"><label for="artpress_smtp_reply_to">Reply-To</label></th>
+            <td>
+                <input type="email" id="artpress_smtp_reply_to" name="artpress_smtp[reply_to]"
+                       value="<?php echo esc_attr($reply_to); ?>" class="regular-text"
+                       placeholder="reply@example.com">
+                <p class="description">Recipients will reply to this address instead of the From email.</p>
+            </td>
+        </tr>
     </table>
     <?php
 }
-
-add_action('phpmailer_init', function ($phpmailer) {
-    $opts = get_option('artpress_smtp', []);
-
-    if (empty($opts['enabled'])) {
-        return;
-    }
-
-    $phpmailer->isSMTP();
-    $phpmailer->Host       = $opts['host'] ?? '';
-    $phpmailer->Port       = $opts['port'] ?? 587;
-    $phpmailer->SMTPSecure = ($opts['encryption'] ?? 'none') === 'none' ? '' : $opts['encryption'];
-    $phpmailer->SMTPAuth   = !empty($opts['auth']);
-
-    if ($phpmailer->SMTPAuth) {
-        $phpmailer->Username = $opts['username'] ?? '';
-        $phpmailer->Password = $opts['password'] ?? '';
-    }
-
-    if (!empty($opts['from_email'])) {
-        $phpmailer->From = $opts['from_email'];
-    }
-
-    if (!empty($opts['from_name'])) {
-        $phpmailer->FromName = $opts['from_name'];
-    }
-});

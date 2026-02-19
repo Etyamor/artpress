@@ -54,10 +54,14 @@
 }
 
 .header-menu > li.menu-item-has-children > a::after {
-  font-family: var(--fa-family-classic);
-  font-weight: 900;
-  content: '\f078';
-  @apply text-[0.6rem] opacity-50 transition-transform duration-150;
+  content: '';
+  width: 0.6rem;
+  height: 0.6rem;
+  background-color: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3Cpath d='M201.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 338.7 54.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  @apply opacity-50 transition-transform duration-150;
 }
 
 @media (min-width: 1024px) {
