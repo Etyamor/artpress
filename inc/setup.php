@@ -15,22 +15,6 @@ add_action('after_setup_theme', function () {
     ]);
 });
 
-// Add 'current-tag' class to the active tag in the tag cloud widget.
-add_filter('wp_tag_cloud', function ($output) {
-    if (!is_tag()) {
-        return $output;
-    }
-    $current_tag = get_queried_object();
-    if (!$current_tag) {
-        return $output;
-    }
-    return str_replace(
-        'tag-link-' . $current_tag->term_id . ' ',
-        'tag-link-' . $current_tag->term_id . ' current-tag ',
-        $output
-    );
-});
-
 add_action('widgets_init', function () {
     register_sidebar([
         'name'          => __('Sidebar', 'artpress'),

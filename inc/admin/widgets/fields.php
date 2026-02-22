@@ -21,6 +21,10 @@ function artpress_widgets_page() {
 
             <hr>
 
+            <?php artpress_widgets_tag_cloud_fields($opts); ?>
+
+            <hr>
+
             <?php artpress_widgets_search_fields($opts); ?>
 
             <?php submit_button(); ?>

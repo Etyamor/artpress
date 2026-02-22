@@ -84,12 +84,11 @@
 /* Tag cloud — badges */
 
 .wp-block-tag-cloud {
-  @apply flex flex-wrap gap-2 m-0;
+  @apply flex flex-wrap gap-1 m-0;
 }
 
 .wp-block-tag-cloud .tag-cloud-link {
-  font-size: inherit !important;
-  @apply inline-block px-3 py-1 text-xs font-medium text-foreground-secondary no-underline;
+  @apply inline-block max-w-48 truncate px-1.5 py-px text-[0.875rem] font-medium text-foreground-secondary no-underline;
   @apply bg-background border border-border rounded-full transition-colors;
 }
 

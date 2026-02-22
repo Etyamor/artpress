@@ -31,6 +31,13 @@ function artpress_widgets_sanitize($input) {
         ? $input['category_orderby']
         : 'name';
 
+    $tag_limit = $input['tag_cloud_limit'] ?? '';
+    $clean['tag_cloud_limit'] = $tag_limit !== '' ? absint($tag_limit) : '';
+
+    $clean['tag_cloud_orderby'] = in_array($input['tag_cloud_orderby'] ?? '', ['name', 'count'], true)
+        ? $input['tag_cloud_orderby']
+        : 'name';
+
     $clean['search_title']   = !empty($input['search_title']);
     $clean['search_content'] = !empty($input['search_content']);
     $clean['search_excerpt'] = !empty($input['search_excerpt']);
