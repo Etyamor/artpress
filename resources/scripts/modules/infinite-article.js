@@ -48,14 +48,6 @@ if (typeof artpressInfinite === 'undefined') {
         const article = wrapper.firstElementChild;
         container.appendChild(article);
 
-        // Initialize any AdSense ad slots in the newly appended content.
-        // AdSense only auto-fills slots present on initial page load.
-        // For dynamically added slots we must manually push each one
-        // so adsbygoogle.js picks them up and renders ads into them.
-        article.querySelectorAll('ins.adsbygoogle:not([data-ad-status])').forEach(() => {
-          (window.adsbygoogle = window.adsbygoogle || []).push({});
-        });
-
         excludedIds.push(json.data.postId);
         loaded++;
 

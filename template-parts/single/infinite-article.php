@@ -6,6 +6,7 @@
 ?>
 <div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-title="<?php echo esc_attr(get_the_title() . ' - ' . get_bloginfo('name')); ?>">
     <hr class="max-w-6xl mx-auto border-border" />
+
     <main class="max-w-6xl mx-auto px-6 py-10">
         <div class="flex flex-col lg:flex-row lg:items-start gap-10">
             <article class="flex-1 min-w-0">

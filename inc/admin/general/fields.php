@@ -11,8 +11,8 @@ function artpress_general_render_fields() {
     $share_facebook         = $opts['share_facebook'] ?? true;
     $share_x                = $opts['share_x'] ?? true;
     $share_linkedin         = $opts['share_linkedin'] ?? true;
-    $infinite_article       = $opts['infinite_article'] ?? false;
-    $infinite_article_limit = $opts['infinite_article_limit'] ?? 5;
+    $infinite_article        = $opts['infinite_article'] ?? false;
+    $infinite_article_limit  = $opts['infinite_article_limit'] ?? 5;
 
     ?>
     <table class="form-table">
@@ -56,7 +56,7 @@ function artpress_general_render_fields() {
                     Auto-load next posts when scrolling on single posts
                 </label>
                 <fieldset style="margin-top: 10px; padding-left: 24px;">
-                    <label>
+                    <label style="display: block; margin-bottom: 8px;">
                         Max posts to load:
                         <input type="number" name="artpress_general[infinite_article_limit]" value="<?php echo esc_attr($infinite_article_limit); ?>" min="1" max="20" style="width: 60px;">
                     </label>
