@@ -1,5 +1,11 @@
 /* WordPress block widgets in sidebar */
 
+/* Block widget headings */
+
+.wp-block-group h2.wp-block-heading {
+  @apply text-base font-semibold text-foreground mb-3;
+}
+
 /* Search block */
 
 .wp-block-search__label {
@@ -78,6 +84,72 @@
 
 .wp-block-categories-list .current-cat > a::before {
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3E%3Cpath d='M88.7 223.8L0 375.8V96C0 60.7 28.7 32 64 32H181.5c17 0 33.3 6.7 45.3 18.7l26.5 26.5c12 12 28.3 18.7 45.3 18.7H416c35.3 0 64 28.7 64 64v32H144c-22.8 0-43.8 12.1-55.3 31.8zm27.6 16.1C122.1 230 132.6 224 144 224H544c11.5 0 22 6.1 27.7 16.1s5.7 22.2-.1 32.1l-112 192C453.9 474 443.4 480 432 480H32c-11.5 0-22-6.1-27.7-16.1s-5.7-22.2 .1-32.1l112-192z'/%3E%3C/svg%3E");
+  @apply text-accent;
+}
+
+/* Recent Posts */
+
+.wp-block-latest-posts {
+  @apply list-none m-0 p-0 flex flex-col;
+}
+
+.wp-block-latest-posts li {
+  @apply border-b border-border-subtle last:border-b-0 py-2.5;
+}
+
+.wp-block-latest-posts__post-title {
+  @apply text-sm text-foreground-secondary no-underline transition-colors;
+}
+
+.wp-block-latest-posts__post-title:hover {
+  @apply text-accent;
+}
+
+/* Recent Comments */
+
+.wp-block-latest-comments {
+  @apply m-0 p-0;
+}
+
+.wp-block-latest-comments.no-comments {
+  @apply text-sm text-muted;
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment {
+  @apply border-b border-border-subtle last:border-b-0 py-2.5 text-sm;
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment-meta {
+  @apply text-foreground-secondary;
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment-meta a {
+  @apply text-foreground-secondary no-underline transition-colors;
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment-meta a:hover {
+  @apply text-accent;
+}
+
+.wp-block-latest-comments .wp-block-latest-comments__comment-excerpt p {
+  @apply text-muted mt-1 mb-0 line-clamp-2;
+}
+
+/* Archives */
+
+.wp-block-archives-list {
+  @apply list-none m-0 p-0 flex flex-col;
+}
+
+.wp-block-archives-list li {
+  @apply border-b border-border-subtle last:border-b-0 py-2.5;
+}
+
+.wp-block-archives-list li a {
+  @apply text-sm text-foreground-secondary no-underline transition-colors;
+}
+
+.wp-block-archives-list li a:hover {
   @apply text-accent;
 }
 
