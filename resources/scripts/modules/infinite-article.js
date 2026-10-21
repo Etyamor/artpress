@@ -83,36 +83,72 @@ if (typeof artpressInfinite === 'undefined') {
   }
 
   async function runScripts(pending) {
-    let adsensePushes = 0;
-
     for (const entry of pending) {
-      if (!entry.script.src) {
-        const pushes = entry.script.textContent.match(/adsbygoogle[\s\S]{0,40}?\.push\s*\(/g);
-        if (pushes) adsensePushes += pushes.length;
-      }
-
       try {
         await runScript(entry);
       } catch {
         entry.marker.remove();
       }
     }
+  }
 
-    return adsensePushes;
+  const UNFILLED_SLOT = 'ins.adsbygoogle:not([data-adsbygoogle-status])';
+
+  // Pushes that actually reached AdSense while the current article was being
+  // activated, counted by the guard below.
+  let adsensePushes = 0;
+
+  /**
+   * Keep AdSense's queue from being pushed more times than there are empty
+   * slots, and count the pushes that do get through.
+   *
+   * Once adsbygoogle.js is live a push is processed on the spot and raises an
+   * uncaught TagError when every <ins> on the page is already filled. That is
+   * easy to hit here: AdSense claims the slots of a freshly inserted article
+   * on its own, so the push scripts shipped alongside those slots — which have
+   * to be re-run, since markup inserted as a parsed node never executes its
+   * scripts — can find nothing left to do.
+   *
+   * @return {Function} Call to restore the original push.
+   */
+  function guardAdsensePush() {
+    const queue = (window.adsbygoogle = window.adsbygoogle || []);
+    const native = queue.push;
+
+    if (typeof native !== 'function') return () => {};
+
+    const hadOwnPush = Object.prototype.hasOwnProperty.call(queue, 'push');
+
+    queue.push = function (...args) {
+      // Before the loader arrives the queue is still a plain array: pushes are
+      // only stored, so there is nothing to guard against yet.
+      if (!Array.isArray(queue) && !document.querySelector(UNFILLED_SLOT)) {
+        return queue.length;
+      }
+
+      adsensePushes++;
+
+      return native.apply(queue, args);
+    };
+
+    return () => {
+      if (hadOwnPush) queue.push = native;
+      else delete queue.push;
+    };
   }
 
   /**
-   * AdSense only fills an <ins> slot that has been pushed onto the
-   * adsbygoogle queue. Advanced Ads ships a push script next to every slot it
-   * renders, and those just ran — so only cover the slots left over (hand
-   * placed ad code, other plugins) to avoid pushing a slot twice.
+   * AdSense only fills an <ins> slot that has been pushed onto its queue. Ad
+   * plugins ship a push script next to every slot they render and those have
+   * just run, so this only covers slots left over — hand-placed ad code, or
+   * another plugin's markup.
    */
-  function fillAdSenseSlots(article, adsensePushes) {
-    const unfilled = article.querySelectorAll('ins.adsbygoogle:not([data-adsbygoogle-status])').length;
+  function fillAdSenseSlots(article) {
+    const unfilled = article.querySelectorAll(UNFILLED_SLOT).length;
 
-    for (let i = 0; i < unfilled - adsensePushes; i++) {
+    for (let i = adsensePushes; i < unfilled; i++) {
       try {
-        (window.adsbygoogle = window.adsbygoogle || []).push({});
+        window.adsbygoogle.push({});
       } catch {
         break;
       }
@@ -140,8 +176,18 @@ if (typeof artpressInfinite === 'undefined') {
   }
 
   async function activate(article) {
-    const adsensePushes = await runScripts(detachScripts(article));
-    fillAdSenseSlots(article, adsensePushes);
+    const pending = detachScripts(article);
+
+    adsensePushes = 0;
+    const releaseAdsensePush = guardAdsensePush();
+
+    try {
+      await runScripts(pending);
+      fillAdSenseSlots(article);
+    } finally {
+      releaseAdsensePush();
+    }
+
     decodeConsentedAds(article);
 
     document.dispatchEvent(
