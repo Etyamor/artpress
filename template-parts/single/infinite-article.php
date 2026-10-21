@@ -4,7 +4,7 @@
  * Mirrors the markup in singular.php but without header/footer.
  */
 ?>
-<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-title="<?php echo esc_attr(get_the_title() . ' - ' . get_bloginfo('name')); ?>">
+<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-next-url="<?php echo esc_url(artpress_infinite_next_url()); ?>" data-title="<?php echo esc_attr(get_the_title() . ' - ' . get_bloginfo('name')); ?>">
     <hr class="max-w-6xl mx-auto border-border" />
 
     <main class="max-w-6xl mx-auto px-6 py-10">

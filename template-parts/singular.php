@@ -2,13 +2,13 @@
 get_header();
 
 $general_opts      = get_option('artpress_general', []);
-$infinite_enabled  = $general_opts['infinite_article'] ?? false;
+$infinite_enabled  = is_singular('post') && artpress_infinite_enabled();
 ?>
 
 <div id="reading-progress" class="fixed top-0 left-0 h-1 bg-accent z-50 transition-[width] duration-150 ease-out" style="width: 0%"></div>
 
 <?php if ($infinite_enabled) : ?>
-<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-title="<?php echo esc_attr(wp_get_document_title()); ?>">
+<div class="infinite-article" data-post-id="<?php echo esc_attr(get_the_ID()); ?>" data-url="<?php echo esc_url(get_permalink()); ?>" data-next-url="<?php echo esc_url(artpress_infinite_next_url()); ?>" data-title="<?php echo esc_attr(wp_get_document_title()); ?>">
 <?php endif; ?>
 
 <main class="max-w-6xl mx-auto px-6 py-10">
