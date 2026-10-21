@@ -64,16 +64,11 @@ add_action('wp_enqueue_scripts', function() use ($vite_is_production) {
     }, 10, 2);
 
     // Infinite article data for single posts
-    if (is_singular('post')) {
-        $general_opts = get_option('artpress_general', []);
-        if ($general_opts['infinite_article'] ?? false) {
-            $script_handle = $vite_is_production ? 'vite-' . sanitize_title('resources/scripts/scripts.js') : 'theme-scripts';
-            wp_localize_script($script_handle, 'artpressInfinite', [
-                'ajaxUrl' => admin_url('admin-ajax.php'),
-                'nonce'   => wp_create_nonce('artpress_infinite'),
-                'limit'   => intval($general_opts['infinite_article_limit'] ?? 5),
-                'postId'  => get_the_ID(),
-            ]);
-        }
+    if (is_singular('post') && artpress_infinite_enabled()) {
+        $general_opts  = get_option('artpress_general', []);
+        $script_handle = $vite_is_production ? 'vite-' . sanitize_title('resources/scripts/scripts.js') : 'theme-scripts';
+        wp_localize_script($script_handle, 'artpressInfinite', [
+            'limit' => intval($general_opts['infinite_article_limit'] ?? 5),
+        ]);
     }
 });
