@@ -31,3 +31,36 @@ function artpress_fix_adsense_ins_tag($output) {
     return preg_replace('/<ins(?=[a-zA-Z][a-zA-Z0-9-]*=)/', '<ins ', $output);
 }
 add_filter('advanced-ads-ad-output', 'artpress_fix_adsense_ins_tag', 20);
+
+/**
+ * Feed ads.txt the records the settings screen actually saved.
+ *
+ * Advanced Ads 2.0.29 saves the "Additional records" textarea to the `custom`
+ * key of the `ads-txt` store (option advanced_ads_ads_txt), but its frontend
+ * reads `ads-txt.content` from the `main` store, which is never written. The
+ * value is therefore always empty, get_frontend_output() returns nothing, and
+ * /ads.txt falls through to a 404 no matter what is entered.
+ *
+ * Records already present are left alone, so this keeps working — and stays
+ * harmless — once the plugin reads the right key again.
+ *
+ * @see modules/ads-txt/class-settings.php and modules/ads-txt/class-frontend.php in the plugin.
+ *
+ * @param string $content ads.txt content.
+ * @return string
+ */
+function artpress_fix_ads_txt_content($content) {
+    if (!function_exists('wp_advads_get_setting')) {
+        return $content;
+    }
+
+    $custom  = wp_advads_get_setting('custom', 'ads-txt');
+    $content = is_string($content) ? $content : '';
+
+    if (!is_string($custom) || '' === trim($custom) || false !== strpos($content, trim($custom))) {
+        return $content;
+    }
+
+    return '' === trim($content) ? $custom : $custom . "\n" . $content;
+}
+add_filter('advanced-ads-ads-txt-content', 'artpress_fix_ads_txt_content', 20);
