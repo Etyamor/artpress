@@ -1,0 +1,71 @@
+name: Bump version
+
+# Manual "button": Actions tab → "Bump version" → Run workflow.
+# Commits the new version straight to main as "bump version to X.Y.Z".
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'patch: 1.1.3 → 1.1.4   |   minor: 1.1.3 → 1.2.0'
+        type: choice
+        options:
+          - patch
+          - minor
+        default: patch
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bump-version
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    name: Bump ${{ inputs.bump }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Only from main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Run this workflow from the main branch (selected: ${GITHUB_REF})."
+          exit 1
+
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Bump version
+        id: version
+        run: node scripts/bump-version.mjs "${{ inputs.bump }}"
+
+      - name: Fail if tag already exists
+        env:
+          NEW: ${{ steps.version.outputs.new }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/v$NEW" >/dev/null; then
+            echo "::error::Tag v$NEW already exists."
+            exit 1
+          fi
+
+      - name: Commit and push
+        env:
+          OLD: ${{ steps.version.outputs.old }}
+          NEW: ${{ steps.version.outputs.new }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css readme.txt
+          git commit -m "bump version to $NEW"
+          git push origin HEAD:main
+          {
+            echo "### Version bumped: \`$OLD\` → \`$NEW\`"
+            echo
+            echo "Build the zip: Actions → **Build theme zip** → Run workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
