@@ -18,6 +18,34 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 
+#: inc/category-layout.php:20
+msgid "List with images"
+msgstr "Список із зображеннями"
+
+#: inc/category-layout.php:21
+msgid "Grid with images"
+msgstr "Сітка із зображеннями"
+
+#: inc/category-layout.php:22
+msgid "List without images"
+msgstr "Список без зображень"
+
+#: inc/category-layout.php:23
+msgid "Grid without images"
+msgstr "Сітка без зображень"
+
+#: inc/category-layout.php:141
+msgid "How posts are displayed on this category's archive page."
+msgstr "Як записи відображаються на сторінці архіву цієї рубрики."
+
+#: inc/category-layout.php:148, inc/category-layout.php:157
+msgid "Posts layout"
+msgstr "Вигляд записів"
+
+#: inc/category-layout.php:199
+msgid "Layout"
+msgstr "Вигляд"
+
 #: inc/setup.php:11
 msgid "Primary Menu"
 msgstr "Головне меню"
@@ -34,9 +62,16 @@ msgstr "Категорії футера"
 msgid "Footer Legal"
 msgstr "Правова інформація футера"
 
-#: inc/setup.php:36
+#: inc/setup.php:20
 msgid "Sidebar"
 msgstr "Бічна панель"
+
+#: inc/setup.php:43
+#. translators: %d: reading time in minutes.
+msgid "%d min"
+msgid_plural "%d min"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/subscribe.php:13
 msgid "Security check failed."
@@ -46,12 +81,12 @@ msgstr "Перевірку безпеки не пройдено."
 msgid "Please enter a valid email address."
 msgstr "Будь ласка, введіть дійсну електронну адресу."
 
-#: inc/subscribe.php:23
+#: inc/subscribe.php:24
 #, php-format
 msgid "[%s] New newsletter subscriber"
 msgstr "[%s] Новий підписник розсилки"
 
-#: inc/subscribe.php:24
+#: inc/subscribe.php:26
 #, php-format
 msgid ""
 "New subscriber: %1$s\n"
@@ -60,36 +95,36 @@ msgstr ""
 "Новий підписник: %1$s\n"
 "Дата: %2$s"
 
-#: inc/subscribe.php:29
+#: inc/subscribe.php:31
 msgid "Thank you for subscribing!"
 msgstr "Дякуємо за підписку!"
 
-#: inc/subscribe.php:32
+#: inc/subscribe.php:34
 msgid "Something went wrong. Please try again."
 msgstr "Щось пішло не так. Спробуйте ще раз."
 
-#: template-parts/index.php:9
+#: template-parts/index.php:10
 msgid " — Page %d"
 msgstr " — Сторінка %d"
 
-#: template-parts/index.php:28
+#: template-parts/index.php:30
 msgid "Latest Posts"
 msgstr "Останні публікації"
 
-#: template-parts/index.php:13
+#: template-parts/index.php:15
 #, php-format
 msgid "Search results for: %s"
 msgstr "Результати пошуку для: %s"
 
-#: template-parts/index.php:92
+#: template-parts/index.php:68
 msgid "No posts found."
 msgstr "Публікацій не знайдено."
 
-#: template-parts/index.php:77
+#: template-parts/post-card.php:50
 msgid "Read more"
 msgstr "Читати далі"
 
-#: template-parts/singular.php:42
+#: template-parts/singular.php:48, template-parts/single/infinite-article.php:43
 msgid "Tags:"
 msgstr "Теги:"
 
@@ -101,35 +136,35 @@ msgstr "Усі права захищено."
 msgid "Legal"
 msgstr "Правова інформація"
 
-#: template-parts/footer/menus.php:14
+#: template-parts/footer/menus.php:15
 msgid "Footer menu"
 msgstr "Меню футера"
 
-#: template-parts/footer/menus.php:16
+#: template-parts/footer/menus.php:17
 msgid "Menu"
 msgstr "Меню"
 
-#: template-parts/footer/menus.php:30
+#: template-parts/footer/menus.php:33
 msgid "Footer categories"
 msgstr "Категорії футера"
 
-#: template-parts/footer/menus.php:32
+#: template-parts/footer/menus.php:35
 msgid "Categories"
 msgstr "Категорії"
 
-#: template-parts/footer/subscribe.php:5
+#: template-parts/footer/subscribe.php:11
 msgid "Subscribe to our newsletter"
 msgstr "Підпишіться на нашу розсилку"
 
-#: template-parts/footer/subscribe.php:8
+#: template-parts/footer/subscribe.php:14
 msgid "Get the latest posts delivered straight to your inbox."
 msgstr "Отримуйте найновіші публікації прямо на вашу пошту."
 
-#: template-parts/footer/subscribe.php:19
+#: template-parts/footer/subscribe.php:25
 msgid "Your email address"
 msgstr "Ваша електронна адреса"
 
-#: template-parts/footer/subscribe.php:26
+#: template-parts/footer/subscribe.php:32
 msgid "Subscribe"
 msgstr "Підписатися"
 
@@ -140,6 +175,10 @@ msgstr "Відкрити меню"
 #: template-parts/header/menu.php:1
 msgid "Primary Navigation"
 msgstr "Основна навігація"
+
+#: template-parts/single/related-posts.php:28
+msgid "Related Posts"
+msgstr "Схожі записи"
 
 #: template-parts/single/share-buttons.php:7
 msgid "Share:"
