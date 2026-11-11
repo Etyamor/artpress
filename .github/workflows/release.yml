@@ -1,0 +1,73 @@
+name: Build theme zip
+
+# Manual "button": Actions tab → "Build theme zip" → Run workflow.
+on:
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Also publish a GitHub Release (tag v<style.css Version>) with the zip attached'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    name: CI
+    uses: ./.github/workflows/ci.yml
+
+  package:
+    name: Package
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Read theme version
+        id: meta
+        run: |
+          version="$(grep -m1 'Version:' style.css | sed 's/.*Version:[[:space:]]*//' | tr -d '[:space:]')"
+          test -n "$version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+          echo "zip=artpress-$version.zip" >> "$GITHUB_OUTPUT"
+
+      - name: Build zip
+        run: make zip
+
+      - name: Verify zip contents
+        run: |
+          unzip -l "${{ steps.meta.outputs.zip }}"
+          unzip -l "${{ steps.meta.outputs.zip }}" | grep -q 'artpress/style.css'
+          unzip -l "${{ steps.meta.outputs.zip }}" | grep -q 'artpress/dist/.vite/manifest.json'
+          ! unzip -l "${{ steps.meta.outputs.zip }}" | grep -qE 'artpress/(node_modules|vendor|tests|resources)/'
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: artpress-${{ steps.meta.outputs.version }}
+          path: ${{ steps.meta.outputs.zip }}
+          if-no-files-found: error
+
+      - name: Publish GitHub Release
+        if: ${{ inputs.create_release }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.meta.outputs.version }}
+          ZIP: ${{ steps.meta.outputs.zip }}
+        run: |
+          if gh release view "v$VERSION" >/dev/null 2>&1; then
+            echo "::error::Release v$VERSION already exists — bump Version in style.css first."
+            exit 1
+          fi
+          gh release create "v$VERSION" "$ZIP" \
+            --target "$GITHUB_SHA" \
+            --title "ArtPress $VERSION" \
+            --generate-notes

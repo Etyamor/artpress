@@ -23,7 +23,7 @@ function artpress_post_meta( $args = [] ) {
     $cats   = get_the_category();
     ?>
     <div class="<?php echo esc_attr( $args['class'] ); ?>">
-        <time datetime="<?php echo get_the_date( 'c' ); ?>"><?php echo get_the_date(); ?></time>
+        <time datetime="<?php echo esc_attr( get_the_date( 'c' ) ); ?>"><?php echo esc_html( get_the_date() ); ?></time>
         <?php if ( ! empty( $cats ) ) : ?>
             <?php if ( $middot ) : ?><span>&middot;</span><?php endif; ?>
             <a href="<?php echo esc_url( get_category_link( $cats[0]->term_id ) ); ?>" class="text-accent hover:text-accent-hover transition-colors"><?php echo esc_html( $cats[0]->name ); ?></a>

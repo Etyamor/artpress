@@ -30,7 +30,8 @@ add_filter('posts_search', function ($search, $query) {
 
     $clauses = [];
     foreach ($columns as $col) {
-        $clauses[] = $wpdb->prepare("{$wpdb->posts}.{$col} LIKE %s", $like);
+        // $col comes from the fixed whitelist above, never from user input.
+        $clauses[] = $wpdb->prepare("{$wpdb->posts}.{$col} LIKE %s", $like); // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
     }
 
     return ' AND (' . implode(' OR ', $clauses) . ') ';

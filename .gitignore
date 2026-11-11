@@ -11,3 +11,12 @@
 
 # Playwright MCP
 .playwright-mcp
+.phpcs.cache
+
+# PHP tooling
+/vendor
+.phpunit.result.cache
+
+# Packaging
+/artpress
+/artpress-*.zip

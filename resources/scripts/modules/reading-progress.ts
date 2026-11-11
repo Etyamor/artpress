@@ -1,14 +1,15 @@
 const bar = document.getElementById('reading-progress');
 
 if (bar) {
-  function getActiveArticle() {
-    const articles = document.querySelectorAll('.infinite-article');
+  const getArticles = () => document.querySelectorAll<HTMLElement>('.infinite-article');
+
+  function getActiveArticle(): HTMLElement | null {
+    const articles = getArticles();
     if (articles.length === 0) return null;
 
     let active = articles[0];
     for (const article of articles) {
-      const rect = article.getBoundingClientRect();
-      if (rect.top <= 0) {
+      if (article.getBoundingClientRect().top <= 0) {
         active = article;
       } else {
         break;
@@ -17,10 +18,12 @@ if (bar) {
     return active;
   }
 
-  function update() {
-    const articles = document.querySelectorAll('.infinite-article');
+  function setProgress(pct: number): void {
+    bar!.style.width = `${pct}%`;
+  }
 
-    if (articles.length > 0) {
+  function update(): void {
+    if (getArticles().length > 0) {
       const article = getActiveArticle();
       if (article) {
         const rect = article.getBoundingClientRect();
@@ -29,12 +32,11 @@ if (bar) {
         const pct = articleHeight > 0
           ? Math.min(100, Math.max(0, (scrolled / articleHeight) * 100))
           : 0;
-        bar.style.width = `${pct}%`;
+        setProgress(pct);
       }
     } else {
       const scrollable = document.documentElement.scrollHeight - window.innerHeight;
-      const pct = scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0;
-      bar.style.width = `${pct}%`;
+      setProgress(scrollable > 0 ? (window.scrollY / scrollable) * 100 : 0);
     }
   }
 

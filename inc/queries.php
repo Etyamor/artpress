@@ -36,7 +36,8 @@ function artpress_setup_home_query() {
     $current_page   = max(1, get_query_var('paged', 1));
     $offset         = ARTPRESS_HERO_COUNT + ($current_page - 1) * $posts_per_page;
 
-    $GLOBALS['wp_query'] = new WP_Query([
+    // Intentional: pagination template tags read the global query.
+    $GLOBALS['wp_query'] = new WP_Query([ // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
         'posts_per_page'      => $posts_per_page,
         'offset'              => $offset,
         'paged'               => $current_page,
@@ -53,6 +54,6 @@ function artpress_setup_home_query() {
  * Restore the original global query after the home loop.
  */
 function artpress_restore_query($original_query) {
-    $GLOBALS['wp_query'] = $original_query;
+    $GLOBALS['wp_query'] = $original_query; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
     wp_reset_postdata();
 }

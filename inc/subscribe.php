@@ -13,15 +13,17 @@ function artpress_handle_subscribe() {
         wp_send_json_error(['message' => __('Security check failed.', 'artpress')], 403);
     }
 
-    $email = sanitize_email($_POST['email'] ?? '');
+    $email = sanitize_email(wp_unslash($_POST['email'] ?? ''));
 
     if (!is_email($email)) {
         wp_send_json_error(['message' => __('Please enter a valid email address.', 'artpress')]);
     }
 
     $to      = get_option('admin_email');
+    /* translators: %s: site name. */
     $subject = sprintf(__('[%s] New newsletter subscriber', 'artpress'), get_bloginfo('name'));
-    $body    = sprintf(__("New subscriber: %s\nDate: %s", 'artpress'), $email, current_time('mysql'));
+    /* translators: 1: subscriber email address, 2: subscription date and time. */
+    $body = sprintf(__("New subscriber: %1\$s\nDate: %2\$s", 'artpress'), $email, current_time('mysql'));
 
     $sent = wp_mail($to, $subject, $body);
 

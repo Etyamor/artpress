@@ -48,8 +48,8 @@ msgstr ""
 
 #: inc/subscribe.php:24
 msgid ""
-"New subscriber: %s\n"
-"Date: %s"
+"New subscriber: %1$s\n"
+"Date: %2$s"
 msgstr ""
 
 #: inc/subscribe.php:29

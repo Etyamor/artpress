@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<ruleset name="ArtPress">
+    <description>
+        ArtPress coding standard. Enforces the WordPress security, database,
+        i18n and core-API rules from WPCS plus PHP/WP version compatibility.
+        Pure whitespace/formatting rules from WordPress-Core are intentionally
+        left out: the codebase uses a compact PSR-like style.
+    </description>
+
+    <file>.</file>
+
+    <exclude-pattern>/vendor/*</exclude-pattern>
+    <exclude-pattern>/node_modules/*</exclude-pattern>
+    <exclude-pattern>/dist/*</exclude-pattern>
+    <exclude-pattern>/build/*</exclude-pattern>
+    <exclude-pattern>/tests/*</exclude-pattern>
+
+    <arg name="extensions" value="php"/>
+    <arg name="colors"/>
+    <arg value="sp"/>
+    <arg name="parallel" value="8"/>
+    <arg name="cache" value=".phpcs.cache"/>
+
+    <!-- Theme metadata used by several WPCS sniffs. -->
+    <config name="minimum_wp_version" value="6.1"/>
+    <config name="testVersion" value="8.0-"/>
+
+    <!-- ===== Security (the reason this ruleset exists) ===== -->
+    <!-- Output escaping, nonce verification, input sanitization, safe redirects, plugin-menu slugs. -->
+    <rule ref="WordPress.Security"/>
+    <!-- Treat theme helpers that already escape internally as safe output. -->
+    <rule ref="WordPress.Security.EscapeOutput">
+        <properties>
+            <property name="customAutoEscapedFunctions" type="array">
+                <element value="artpress_reading_time"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- ===== Database ===== -->
+    <!-- Prepared statements, no direct DB queries / raw SQL interpolation, slow query warnings. -->
+    <rule ref="WordPress.DB"/>
+
+    <!-- ===== Dangerous / discouraged PHP + WP APIs ===== -->
+    <rule ref="WordPress.PHP.DiscouragedPHPFunctions"/>
+    <rule ref="WordPress.PHP.DevelopmentFunctions"/>
+    <rule ref="WordPress.PHP.DontExtract"/>
+    <rule ref="WordPress.PHP.IniSet"/>
+    <rule ref="WordPress.PHP.NoSilencedErrors"/>
+    <rule ref="WordPress.PHP.RestrictedPHPFunctions"/>
+    <rule ref="WordPress.PHP.StrictInArray"/>
+    <rule ref="WordPress.PHP.PregQuoteDelimiter"/>
+    <rule ref="WordPress.PHP.TypeCasts"/>
+    <rule ref="WordPress.WP.AlternativeFunctions"/>
+    <rule ref="WordPress.WP.DeprecatedFunctions"/>
+    <rule ref="WordPress.WP.DeprecatedClasses"/>
+    <rule ref="WordPress.WP.DeprecatedParameters"/>
+    <rule ref="WordPress.WP.DeprecatedParameterValues"/>
+    <rule ref="WordPress.WP.DiscouragedConstants"/>
+    <rule ref="WordPress.WP.DiscouragedFunctions"/>
+    <rule ref="WordPress.WP.EnqueuedResources"/>
+    <rule ref="WordPress.WP.EnqueuedResourceParameters"/>
+    <rule ref="WordPress.WP.GlobalVariablesOverride"/>
+    <rule ref="WordPress.WP.PostsPerPage"/>
+    <rule ref="WordPress.WP.CronInterval"/>
+    <rule ref="WordPress.WP.CapitalPDangit"/>
+    <rule ref="WordPress.DateTime"/>
+    <rule ref="WordPress.CodeAnalysis.EscapedNotTranslated"/>
+    <rule ref="WordPress.CodeAnalysis.AssignmentInTernaryCondition"/>
+    <rule ref="Generic.PHP.BacktickOperator"/>
+    <rule ref="Generic.PHP.DeprecatedFunctions"/>
+    <rule ref="Generic.PHP.ForbiddenFunctions"/>
+    <rule ref="Squiz.PHP.Eval"/>
+    <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+    <rule ref="Generic.PHP.DisallowAlternativePHPTags"/>
+
+    <!-- ===== i18n ===== -->
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <property name="text_domain" type="array">
+                <element value="artpress"/>
+            </property>
+        </properties>
+    </rule>
+
+    <!-- ===== Naming / global namespace hygiene ===== -->
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <property name="prefixes" type="array">
+                <element value="artpress"/>
+                <element value="vite_theme"/>
+            </property>
+        </properties>
+    </rule>
+    <!--
+        Template parts are included by load_template(), i.e. inside a function,
+        so their top-level variables are locals, not globals. Root-level
+        templates (index.php, header.php, ...) only delegate and stay checked.
+    -->
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound">
+        <exclude-pattern>/template-parts/*</exclude-pattern>
+    </rule>
+    <rule ref="WordPress.NamingConventions.ValidHookName"/>
+
+    <!-- ===== Compatibility ===== -->
+    <rule ref="PHPCompatibilityWP"/>
+</ruleset>
