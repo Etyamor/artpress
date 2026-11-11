@@ -1,7 +1,8 @@
 name: Bump version
 
 # Manual "button": Actions tab → "Bump version" → Run workflow.
-# Commits the new version straight to main as "bump version to X.Y.Z".
+# Commits the new version (and optional changelog) straight to main as
+# "bump version to X.Y.Z".
 on:
   workflow_dispatch:
     inputs:
@@ -12,6 +13,11 @@ on:
           - patch
           - minor
         default: patch
+      changelog:
+        description: 'Changelog for readme.txt, changes separated by ";" (e.g. "Added category layouts; Fixed share links"). Leave empty to skip.'
+        type: string
+        required: false
+        default: ''
 
 permissions:
   contents: read
@@ -41,9 +47,14 @@ jobs:
         with:
           node-version: 22
 
+      # Inputs go through env vars, never inline into the script, so quotes or
+      # $(...) in the changelog text can't be executed by the shell.
       - name: Bump version
         id: version
-        run: node scripts/bump-version.mjs "${{ inputs.bump }}"
+        env:
+          BUMP: ${{ inputs.bump }}
+          CHANGELOG: ${{ inputs.changelog }}
+        run: node scripts/bump-version.mjs "$BUMP" --changelog "$CHANGELOG"
 
       - name: Fail if tag already exists
         env:
@@ -54,18 +65,32 @@ jobs:
             exit 1
           fi
 
+      - name: Show changes
+        run: git --no-pager diff
+
       - name: Commit and push
         env:
           OLD: ${{ steps.version.outputs.old }}
           NEW: ${{ steps.version.outputs.new }}
+          ENTRIES: ${{ steps.version.outputs.changelog }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add style.css readme.txt
-          git commit -m "bump version to $NEW"
+          if [ -n "$ENTRIES" ]; then
+            git commit -m "bump version to $NEW" -m "$ENTRIES"
+          else
+            git commit -m "bump version to $NEW"
+          fi
           git push origin HEAD:main
           {
             echo "### Version bumped: \`$OLD\` → \`$NEW\`"
             echo
+            if [ -n "$ENTRIES" ]; then
+              echo "Changelog added to readme.txt:"
+              echo
+              echo "$ENTRIES"
+              echo
+            fi
             echo "Build the zip: Actions → **Build theme zip** → Run workflow."
           } >> "$GITHUB_STEP_SUMMARY"

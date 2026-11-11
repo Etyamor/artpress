@@ -76,7 +76,15 @@ Whitespace/formatting rules are deliberately not enforced. Intentional exception
   - `patch` — `1.1.3 → 1.1.4`
   - `minor` — `1.1.3 → 1.2.0`
 
-  It updates `Version:` in `style.css` and `Stable tag:` in `readme.txt` and commits `bump version to X.Y.Z` to `main`. Same thing locally: `npm run version:patch` / `npm run version:minor`.
+  Optionally fill **Changelog** with changes separated by `;`, e.g. `Added category layouts; fixed share links`. They are added to `readme.txt` as:
+
+  ```
+  = 1.2.0 =
+  * Added category layouts
+  * Fixed share links
+  ```
+
+  It updates `Version:` in `style.css` and `Stable tag:` in `readme.txt`, adds the changelog section, and commits `bump version to X.Y.Z` to `main`. Same thing locally: `npm run version:minor -- --changelog "Added X; Fixed Y"`.
 
 Typical release: merge → **Bump version** → **Build theme zip**. The version comes from `Version:` in `style.css`.
 

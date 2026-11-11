@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { bumpVersion, readThemeVersion, applyVersion } from './bump-version.mjs';
+import {
+  bumpVersion, readThemeVersion, applyVersion, parseChangelog, addChangelogEntry, parseArgs,
+} from './bump-version.mjs';
 
 test('patch bumps the third digit', () => {
   assert.equal(bumpVersion('1.1.3', 'patch'), '1.1.4');
@@ -50,4 +52,72 @@ test('only the version header and stable tag change', () => {
 
 test('fails when readme.txt has no stable tag', () => {
   assert.throws(() => applyVersion({ css: CSS, readme: '=== X ===' }, '1.2.0'), /Stable tag/);
+});
+
+// ----- Changelog -----
+
+test('parses semicolon-separated changes', () => {
+  assert.deepEqual(
+    parseChangelog('Added category layouts; fixed share links ;;  * Updated   translations ; - removed X;'),
+    ['Added category layouts', 'Fixed share links', 'Updated translations', 'Removed X'],
+  );
+});
+
+test('empty changelog input yields no entries', () => {
+  assert.deepEqual(parseChangelog(''), []);
+  assert.deepEqual(parseChangelog(undefined), []);
+  assert.deepEqual(parseChangelog(' ; ;  '), []);
+});
+
+test('multi-line input is flattened to single-line entries', () => {
+  assert.deepEqual(parseChangelog('Line one\ncontinued; two'), ['Line one continued', 'Two']);
+});
+
+const CHANGELOG_README = `=== ArtPress ===
+
+Stable tag: 1.0.5
+
+== Changelog ==
+
+= 1.0.5 =
+* Added translations
+
+= 1.0.4 =
+* Added progress bar
+
+== Copyright ==
+`;
+
+test('adds a new section at the top of the changelog', () => {
+  const out = addChangelogEntry(CHANGELOG_README, '1.2.0', ['Added layouts', 'Fixed links']);
+
+  assert.equal(out, CHANGELOG_README.replace(
+    '== Changelog ==\n\n= 1.0.5 =',
+    '== Changelog ==\n\n= 1.2.0 =\n* Added layouts\n* Fixed links\n\n= 1.0.5 =',
+  ));
+});
+
+test('no entries leaves readme untouched', () => {
+  assert.equal(addChangelogEntry(CHANGELOG_README, '1.2.0', []), CHANGELOG_README);
+});
+
+test('works with an empty changelog section', () => {
+  const out = addChangelogEntry('== Changelog ==\n\n== Copyright ==\n', '1.0.0', ['Initial']);
+  assert.equal(out, '== Changelog ==\n\n= 1.0.0 =\n* Initial\n\n== Copyright ==\n');
+});
+
+test('refuses duplicate versions and missing section', () => {
+  assert.throws(() => addChangelogEntry(CHANGELOG_README, '1.0.5', ['X']), /already has a changelog entry/);
+  assert.throws(() => addChangelogEntry('=== X ===', '1.0.0', ['X']), /No "== Changelog ==" section/);
+});
+
+test('version dots are not regex wildcards in the duplicate check', () => {
+  assert.doesNotThrow(() => addChangelogEntry('== Changelog ==\n\n= 1x0x5 =\n* a\n', '1.0.5', ['b']));
+});
+
+test('parses CLI args', () => {
+  assert.deepEqual(parseArgs(['minor']), { type: 'minor', changelog: '' });
+  assert.deepEqual(parseArgs(['patch', '--changelog', 'a; b']), { type: 'patch', changelog: 'a; b' });
+  assert.deepEqual(parseArgs(['--changelog=a;b', 'minor']), { type: 'minor', changelog: 'a;b' });
+  assert.throws(() => parseArgs(['patch', 'minor']), /Unexpected argument/);
 });
