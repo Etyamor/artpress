@@ -72,7 +72,21 @@ Whitespace/formatting rules are deliberately not enforced. Intentional exception
 - **CI** (`.github/workflows/ci.yml`) — on every push to `main` and every PR: PHPCS, PHPUnit on PHP 8.0–8.4, TypeScript type-check + Vite build.
 - **Build theme zip** (`.github/workflows/release.yml`) — manual. Go to **Actions → Build theme zip → Run workflow**. It runs CI, then `make zip`, and uploads `artpress-<version>.zip` as a workflow artifact. Tick **"Also publish a GitHub Release"** to create release `v<version>` with the zip attached (fails if that tag already exists).
 
-The version comes from `Version:` in `style.css`.
+- **Bump version** (`.github/workflows/bump-version.yml`) — manual. Go to **Actions → Bump version → Run workflow**, choose:
+  - `patch` — `1.1.3 → 1.1.4`
+  - `minor` — `1.1.3 → 1.2.0`
+
+  Optionally fill **Changelog** with changes separated by `;`, e.g. `Added category layouts; fixed share links`. They are added to `readme.txt` as:
+
+  ```
+  = 1.2.0 =
+  * Added category layouts
+  * Fixed share links
+  ```
+
+  It updates `Version:` in `style.css` and `Stable tag:` in `readme.txt`, adds the changelog section, and commits `bump version to X.Y.Z` to `main`. Same thing locally: `npm run version:minor -- --changelog "Added X; Fixed Y"`.
+
+Typical release: merge → **Bump version** → **Build theme zip**. The version comes from `Version:` in `style.css`.
 
 ## Packaging locally
 

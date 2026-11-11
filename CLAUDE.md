@@ -106,10 +106,12 @@ Build output: images → `dist/images/[hash]`, fonts → `dist/fonts/[hash]`, CS
 
 - `.github/workflows/ci.yml` — push to `main`, PRs, and `workflow_call`: PHPCS (`cs2pr` annotations), PHPUnit matrix PHP 8.0–8.4, `npm ci` + typecheck + build. `package-lock.json` must stay in sync with `package.json` (`npm ci` fails otherwise).
 - `.github/workflows/release.yml` — `workflow_dispatch` ("Build theme zip" button): calls CI, then `make zip`, verifies the archive (contains `style.css` + manifest, no `node_modules/vendor/tests/resources`), uploads it as an artifact; optional input `create_release` publishes GitHub Release `v<Version>`.
+- `.github/workflows/bump-version.yml` — `workflow_dispatch` ("Bump version" button, main only) with choice `patch` (1.1.3→1.1.4) or `minor` (1.1.3→1.2.0). Optional `changelog` input: `;`-separated changes, turned by `scripts/bump-version.mjs --changelog` into a `= X.Y.Z =` section with `* ` bullets at the top of readme.txt's `== Changelog ==` (entries trimmed, list markers stripped, first letter capitalized; fails if the version already has a section). Inputs reach the script via env vars only — keep it that way (shell injection). The script also rewrites `Version:` in `style.css` and `Stable tag:` in `readme.txt`, then commits `bump version to X.Y.Z` to main as github-actions[bot] (fails if tag `vX.Y.Z` exists). Pushes made with GITHUB_TOKEN don't trigger CI. Locally: `npm run version:patch|version:minor`; script tests: `npm run test:scripts` (node:test, also run in CI).
 - Zip contents are defined by `DIST_FILES`/`DIST_DIRS` in the `Makefile` — add new root-level PHP templates there.
 
 ## Release Checklist
 
-1. Bump `Version:` in `style.css` (and `Stable tag` + changelog in `readme.txt`).
-2. `npm run i18n` if strings changed.
-3. Merge to `main`, then Actions → Build theme zip → Run workflow (tick release if publishing).
+1. `npm run i18n` if strings changed.
+2. Merge to `main`.
+3. Actions → Bump version → Run workflow (patch or minor, changelog as `Change one; Change two`).
+4. Actions → Build theme zip → Run workflow (tick release if publishing).

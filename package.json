@@ -7,7 +7,10 @@
     "i18n:pot": "node scripts/make-pot.mjs",
     "i18n:mo": "node scripts/make-mo.mjs",
     "i18n:sync": "node scripts/sync-po.mjs",
-    "i18n": "npm run i18n:pot && npm run i18n:sync && npm run i18n:mo"
+    "i18n": "npm run i18n:pot && npm run i18n:sync && npm run i18n:mo",
+    "test:scripts": "node --test \"scripts/*.test.mjs\"",
+    "version:patch": "node scripts/bump-version.mjs patch",
+    "version:minor": "node scripts/bump-version.mjs minor"
   },
   "devDependencies": {
     "@fontsource/roboto": "^5.2.8",

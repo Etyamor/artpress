@@ -1,0 +1,96 @@
+name: Bump version
+
+# Manual "button": Actions tab → "Bump version" → Run workflow.
+# Commits the new version (and optional changelog) straight to main as
+# "bump version to X.Y.Z".
+on:
+  workflow_dispatch:
+    inputs:
+      bump:
+        description: 'patch: 1.1.3 → 1.1.4   |   minor: 1.1.3 → 1.2.0'
+        type: choice
+        options:
+          - patch
+          - minor
+        default: patch
+      changelog:
+        description: 'Changelog for readme.txt, changes separated by ";" (e.g. "Added category layouts; Fixed share links"). Leave empty to skip.'
+        type: string
+        required: false
+        default: ''
+
+permissions:
+  contents: read
+
+concurrency:
+  group: bump-version
+  cancel-in-progress: false
+
+jobs:
+  bump:
+    name: Bump ${{ inputs.bump }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Only from main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Run this workflow from the main branch (selected: ${GITHUB_REF})."
+          exit 1
+
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      # Inputs go through env vars, never inline into the script, so quotes or
+      # $(...) in the changelog text can't be executed by the shell.
+      - name: Bump version
+        id: version
+        env:
+          BUMP: ${{ inputs.bump }}
+          CHANGELOG: ${{ inputs.changelog }}
+        run: node scripts/bump-version.mjs "$BUMP" --changelog "$CHANGELOG"
+
+      - name: Fail if tag already exists
+        env:
+          NEW: ${{ steps.version.outputs.new }}
+        run: |
+          if git ls-remote --exit-code --tags origin "refs/tags/v$NEW" >/dev/null; then
+            echo "::error::Tag v$NEW already exists."
+            exit 1
+          fi
+
+      - name: Show changes
+        run: git --no-pager diff
+
+      - name: Commit and push
+        env:
+          OLD: ${{ steps.version.outputs.old }}
+          NEW: ${{ steps.version.outputs.new }}
+          ENTRIES: ${{ steps.version.outputs.changelog }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add style.css readme.txt
+          if [ -n "$ENTRIES" ]; then
+            git commit -m "bump version to $NEW" -m "$ENTRIES"
+          else
+            git commit -m "bump version to $NEW"
+          fi
+          git push origin HEAD:main
+          {
+            echo "### Version bumped: \`$OLD\` → \`$NEW\`"
+            echo
+            if [ -n "$ENTRIES" ]; then
+              echo "Changelog added to readme.txt:"
+              echo
+              echo "$ENTRIES"
+              echo
+            fi
+            echo "Build the zip: Actions → **Build theme zip** → Run workflow."
+          } >> "$GITHUB_STEP_SUMMARY"
