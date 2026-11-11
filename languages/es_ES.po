@@ -17,6 +17,34 @@ msgstr ""
 "X-Domain: artpress\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: inc/category-layout.php:20
+msgid "List with images"
+msgstr "Lista con imágenes"
+
+#: inc/category-layout.php:21
+msgid "Grid with images"
+msgstr "Cuadrícula con imágenes"
+
+#: inc/category-layout.php:22
+msgid "List without images"
+msgstr "Lista sin imágenes"
+
+#: inc/category-layout.php:23
+msgid "Grid without images"
+msgstr "Cuadrícula sin imágenes"
+
+#: inc/category-layout.php:141
+msgid "How posts are displayed on this category's archive page."
+msgstr "Cómo se muestran las entradas en la página de archivo de esta categoría."
+
+#: inc/category-layout.php:148, inc/category-layout.php:157
+msgid "Posts layout"
+msgstr "Diseño de entradas"
+
+#: inc/category-layout.php:199
+msgid "Layout"
+msgstr "Diseño"
+
 #: inc/setup.php:11
 msgid "Primary Menu"
 msgstr "Menú principal"
@@ -33,9 +61,16 @@ msgstr "Categorías del pie de página"
 msgid "Footer Legal"
 msgstr "Información legal del pie de página"
 
-#: inc/setup.php:36
+#: inc/setup.php:20
 msgid "Sidebar"
 msgstr "Barra lateral"
+
+#: inc/setup.php:43
+#. translators: %d: reading time in minutes.
+msgid "%d min"
+msgid_plural "%d min"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/subscribe.php:13
 msgid "Security check failed."
@@ -45,12 +80,12 @@ msgstr "La verificación de seguridad ha fallado."
 msgid "Please enter a valid email address."
 msgstr "Por favor, introduce una dirección de correo electrónico válida."
 
-#: inc/subscribe.php:23
+#: inc/subscribe.php:24
 #, php-format
 msgid "[%s] New newsletter subscriber"
 msgstr "[%s] Nuevo suscriptor del boletín"
 
-#: inc/subscribe.php:24
+#: inc/subscribe.php:26
 #, php-format
 msgid ""
 "New subscriber: %1$s\n"
@@ -59,36 +94,36 @@ msgstr ""
 "Nuevo suscriptor: %1$s\n"
 "Fecha: %2$s"
 
-#: inc/subscribe.php:29
+#: inc/subscribe.php:31
 msgid "Thank you for subscribing!"
 msgstr "¡Gracias por suscribirte!"
 
-#: inc/subscribe.php:32
+#: inc/subscribe.php:34
 msgid "Something went wrong. Please try again."
 msgstr "Algo salió mal. Por favor, inténtalo de nuevo."
 
-#: template-parts/index.php:9
+#: template-parts/index.php:10
 msgid " — Page %d"
 msgstr " — Página %d"
 
-#: template-parts/index.php:28
+#: template-parts/index.php:30
 msgid "Latest Posts"
 msgstr "Últimas publicaciones"
 
-#: template-parts/index.php:13
+#: template-parts/index.php:15
 #, php-format
 msgid "Search results for: %s"
 msgstr "Resultados de búsqueda para: %s"
 
-#: template-parts/index.php:92
+#: template-parts/index.php:68
 msgid "No posts found."
 msgstr "No se encontraron publicaciones."
 
-#: template-parts/index.php:77
+#: template-parts/post-card.php:50
 msgid "Read more"
 msgstr "Leer más"
 
-#: template-parts/singular.php:42
+#: template-parts/singular.php:48, template-parts/single/infinite-article.php:43
 msgid "Tags:"
 msgstr "Etiquetas:"
 
@@ -100,35 +135,35 @@ msgstr "Todos los derechos reservados."
 msgid "Legal"
 msgstr "Legal"
 
-#: template-parts/footer/menus.php:14
+#: template-parts/footer/menus.php:15
 msgid "Footer menu"
 msgstr "Menú del pie de página"
 
-#: template-parts/footer/menus.php:16
+#: template-parts/footer/menus.php:17
 msgid "Menu"
 msgstr "Menú"
 
-#: template-parts/footer/menus.php:30
+#: template-parts/footer/menus.php:33
 msgid "Footer categories"
 msgstr "Categorías del pie de página"
 
-#: template-parts/footer/menus.php:32
+#: template-parts/footer/menus.php:35
 msgid "Categories"
 msgstr "Categorías"
 
-#: template-parts/footer/subscribe.php:5
+#: template-parts/footer/subscribe.php:11
 msgid "Subscribe to our newsletter"
 msgstr "Suscríbete a nuestro boletín"
 
-#: template-parts/footer/subscribe.php:8
+#: template-parts/footer/subscribe.php:14
 msgid "Get the latest posts delivered straight to your inbox."
 msgstr "Recibe las últimas publicaciones directamente en tu bandeja de entrada."
 
-#: template-parts/footer/subscribe.php:19
+#: template-parts/footer/subscribe.php:25
 msgid "Your email address"
 msgstr "Su correo electrónico"
 
-#: template-parts/footer/subscribe.php:26
+#: template-parts/footer/subscribe.php:32
 msgid "Subscribe"
 msgstr "Suscribirse"
 
@@ -139,6 +174,10 @@ msgstr "Abrir menú"
 #: template-parts/header/menu.php:1
 msgid "Primary Navigation"
 msgstr "Navegación principal"
+
+#: template-parts/single/related-posts.php:28
+msgid "Related Posts"
+msgstr "Entradas relacionadas"
 
 #: template-parts/single/share-buttons.php:7
 msgid "Share:"

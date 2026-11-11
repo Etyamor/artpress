@@ -17,6 +17,7 @@ A blog-focused classic WordPress theme. Assets are built with **Vite**, styled w
 | SMTP for `wp_mail()` | `inc/admin/smtp/*` | ArtPress → SMTP |
 | Categories / Tag Cloud block limits & sort, search-column selection | `inc/admin/widgets/*` | ArtPress → Widgets |
 | Advanced Ads / AdSense compatibility patches | `inc/ads-compat.php` | — |
+| Per-category archive layout: list / grid, with or without images | `inc/category-layout.php`, `template-parts/post-card.php` | Posts → Categories → edit → *Posts layout* |
 | Related posts | `template-parts/single/related-posts.php` | — |
 
 ## Requirements for development

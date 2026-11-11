@@ -49,14 +49,11 @@
         <div class="flex flex-col lg:flex-row lg:items-start gap-10">
             <!-- Posts -->
             <div class="flex-1 min-w-0">
-                <?php if ($is_home) : ?>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <?php else : ?>
-                    <div class="flex flex-col gap-6">
-                <?php endif; ?>
+                <?php $layout = $is_home ? 'grid' : artpress_current_archive_layout(); ?>
+                <div class="<?php echo esc_attr(artpress_layout_wrapper_class($layout)); ?>">
 
                 <?php while (have_posts()) : the_post(); ?>
-                    <?php get_template_part('template-parts/post-card', null, ['is_home' => $is_home]); ?>
+                    <?php get_template_part('template-parts/post-card', null, ['layout' => $layout]); ?>
                 <?php endwhile; ?>
 
                 </div>
