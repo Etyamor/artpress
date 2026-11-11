@@ -1,4 +1,4 @@
-const burger = document.querySelector('.burger-button');
+const burger = document.querySelector<HTMLButtonElement>('.burger-button');
 const nav = document.getElementById('site-nav');
 
 if (burger && nav) {

@@ -39,6 +39,7 @@ function artpress_reading_time($post_id = null) {
     $minutes = max(1, (int) ceil($words / 200));
 
     return sprintf(
+        /* translators: %d: reading time in minutes. */
         _n('%d min', '%d min', $minutes, 'artpress'),
         $minutes
     );

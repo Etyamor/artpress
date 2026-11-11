@@ -25,7 +25,8 @@ function artpress_settings_page() {
         'smtp'    => 'SMTP',
     ];
 
-    $active_tab = isset($_GET['tab']) ? sanitize_key($_GET['tab']) : 'general';
+    // Read-only tab switch, validated against $tabs below; no state changes, so no nonce.
+    $active_tab = isset($_GET['tab']) ? sanitize_key(wp_unslash($_GET['tab'])) : 'general'; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
 
     if (!array_key_exists($active_tab, $tabs)) {
         $active_tab = 'general';

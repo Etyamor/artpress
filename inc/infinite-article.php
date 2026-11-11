@@ -110,7 +110,7 @@ add_action('template_redirect', function () {
     // query argument would otherwise serve a headerless partial to everyone
     // asking for the post itself.
     if (!defined('DONOTCACHEPAGE')) {
-        define('DONOTCACHEPAGE', true);
+        define('DONOTCACHEPAGE', true); // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound -- shared page-cache convention.
     }
 
     nocache_headers();

@@ -5,11 +5,13 @@
     $is_home = is_home();
     $h1_class = $is_home ? 'sr-only' : 'text-3xl font-bold text-foreground mb-8';
 
-    $paged = get_query_var('paged', 0);
-    $page_suffix = $paged > 1 ? sprintf(esc_html__(' — Page %d', 'artpress'), $paged) : '';
+    $page_num    = (int) get_query_var('paged', 0);
+    /* translators: %d: page number. */
+    $page_suffix = $page_num > 1 ? sprintf(esc_html__(' — Page %d', 'artpress'), $page_num) : '';
     ?>
-    <h1 class="<?php echo $h1_class; ?>"><?php
+    <h1 class="<?php echo esc_attr($h1_class); ?>"><?php
         if (is_search()) {
+            /* translators: %s: search query. */
             printf(esc_html__('Search results for: %s', 'artpress'), '<span class="text-accent">' . esc_html(get_search_query()) . '</span>');
             echo esc_html($page_suffix);
         } elseif (is_category()) {

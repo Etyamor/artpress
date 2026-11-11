@@ -53,11 +53,11 @@ msgstr "[%s] Nuevo suscriptor del boletín"
 #: inc/subscribe.php:24
 #, php-format
 msgid ""
-"New subscriber: %s\n"
-"Date: %s"
+"New subscriber: %1$s\n"
+"Date: %2$s"
 msgstr ""
-"Nuevo suscriptor: %s\n"
-"Fecha: %s"
+"Nuevo suscriptor: %1$s\n"
+"Fecha: %2$s"
 
 #: inc/subscribe.php:29
 msgid "Thank you for subscribing!"

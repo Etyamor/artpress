@@ -54,11 +54,11 @@ msgstr "[%s] Новий підписник розсилки"
 #: inc/subscribe.php:24
 #, php-format
 msgid ""
-"New subscriber: %s\n"
-"Date: %s"
+"New subscriber: %1$s\n"
+"Date: %2$s"
 msgstr ""
-"Новий підписник: %s\n"
-"Дата: %s"
+"Новий підписник: %1$s\n"
+"Дата: %2$s"
 
 #: inc/subscribe.php:29
 msgid "Thank you for subscribing!"
