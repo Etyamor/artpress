@@ -49,6 +49,18 @@
   @apply bg-transparent text-inherit p-0;
 }
 
+/* Embeds — WordPress prints fixed width/height attributes on oEmbed iframes
+   (e.g. YouTube width="500"), and the block-library CSS that normally makes
+   them responsive is dequeued in inc/cleanup.php. */
+.prose :where(iframe, embed, object) {
+  @apply max-w-full;
+}
+
+/* Video players scale to the content width at 16:9. */
+.prose :where(iframe[src*="youtube.com/"], iframe[src*="youtube-nocookie.com/"], iframe[src*="player.vimeo.com/"]) {
+  @apply block w-full h-auto aspect-video;
+}
+
 .prose :where(figcaption) {
   @apply text-muted;
 }
