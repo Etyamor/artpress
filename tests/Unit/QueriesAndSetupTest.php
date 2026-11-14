@@ -3,6 +3,7 @@
 namespace ArtPress\Tests\Unit;
 
 use ArtPress\Tests\TestCase;
+use Brain\Monkey\Filters;
 use Brain\Monkey\Functions;
 
 class QueriesAndSetupTest extends TestCase {
@@ -65,16 +66,24 @@ class QueriesAndSetupTest extends TestCase {
         $this->assertSame($original, $GLOBALS['wp_query']);
     }
 
+    private function readingTimeFor(string $content): string {
+        Functions\expect('get_post_field')->with('post_content', null)->andReturn($content);
+        Functions\when('wp_strip_all_tags')->alias('strip_tags');
+        Functions\when('strip_shortcodes')->alias(static function ($c) {
+            return preg_replace('/\[[^\]]*\]/', '', $c);
+        });
+        Functions\when('_n')->returnArg(1);
+
+        return artpress_reading_time();
+    }
+
     /**
      * @dataProvider readingTimeProvider
      */
     public function test_reading_time($words, $expected_minutes) {
         $content = '<p>' . str_repeat('word ', $words) . '</p>';
-        Functions\expect('get_post_field')->with('post_content', null)->andReturn($content);
-        Functions\when('wp_strip_all_tags')->alias('strip_tags');
-        Functions\when('_n')->returnArg(1);
 
-        $this->assertSame($expected_minutes . ' min', artpress_reading_time());
+        $this->assertSame($expected_minutes . ' min', $this->readingTimeFor($content));
     }
 
     public function readingTimeProvider() {
@@ -83,7 +92,47 @@ class QueriesAndSetupTest extends TestCase {
             'short post'  => [50, 1],
             'exactly 200' => [200, 1],
             'just over'   => [201, 2],
-            'long read'   => [1000, 5],
+            'long post'   => [1500, 8],
+        ];
+    }
+
+    public function test_reading_time_counts_cyrillic_words() {
+        // 5 words × 300 = 1500 words → 8 min (was always "1 min").
+        $content = '<!-- wp:paragraph --><p>' . str_repeat("Мистецтво завжди відображає п'ять епох. ", 300) . '</p><!-- /wp:paragraph -->';
+
+        $this->assertSame('8 min', $this->readingTimeFor($content));
+    }
+
+    public function test_reading_time_ignores_markup_shortcodes_and_entities() {
+        $content = '<figure><img src="a.jpg" alt="alt text here"></figure>[gallery ids="1,2,3"]'
+            . '<p>' . str_repeat('word&nbsp;&mdash; ', 201) . '</p>';
+
+        $this->assertSame('2 min', $this->readingTimeFor($content));
+    }
+
+    public function test_reading_speed_is_filterable() {
+        Filters\expectApplied('artpress_reading_time_wpm')->andReturn(100);
+
+        $this->assertSame('3 min', $this->readingTimeFor('<p>' . str_repeat('word ', 201) . '</p>'));
+    }
+
+    /**
+     * @dataProvider wordCountProvider
+     */
+    public function test_count_words($text, $expected) {
+        $this->assertSame($expected, artpress_count_words($text));
+    }
+
+    public function wordCountProvider() {
+        return [
+            'english'               => ['Art always reflects its era.', 5],
+            'ukrainian'             => ['Мистецтво завжди відображає свою епоху.', 5],
+            'apostrophes'           => ["п'ять пʼять п’ять don't", 4],
+            'hyphenated'            => ['well-known будь-який', 2],
+            'numbers'               => ['In 2026 there were 12 shows', 6],
+            'punctuation only'      => [' — … ; ! ', 0],
+            'empty'                 => ['', 0],
+            'accents'               => ['Café naïve España', 3],
         ];
     }
 }

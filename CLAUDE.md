@@ -39,7 +39,7 @@ Use `php:8.0-cli` to verify the minimum PHP version. For `make zip`, use a `node
 `functions.php` only `require_once`s modules from `inc/`. Root templates (`header.php`, `footer.php`, `index.php`, `singular.php`) only call `get_template_part()` into `template-parts/`. Template parts execute inside `load_template()`, so their top-level variables are **function-local** (this is why PHPCS's PrefixAllGlobals variable rule is excluded for `template-parts/`).
 
 ### inc/ modules
-- `setup.php` — theme supports, 4 nav menus (`primary`, `footer`, `footer_categories`, `footer_legal`), `sidebar-1`, `artpress_reading_time()` (200 wpm, min 1).
+- `setup.php` — theme supports, 4 nav menus (`primary`, `footer`, `footer_categories`, `footer_legal`), `sidebar-1`, `artpress_reading_time()` (Unicode-aware `artpress_count_words()` — never `str_word_count()`, it ignores Cyrillic; 200 wpm via filter `artpress_reading_time_wpm`, min 1).
 - `assets.php` — dual-mode Vite loading (see below). Localizes `artpressInfinite` onto the main script on single posts when infinite article is on.
 - `cleanup.php` — removes emoji, generator, block-library CSS, jQuery, etc.
 - `queries.php` — `ARTPRESS_HERO_COUNT = 9`; `artpress_setup_home_query()` **intentionally replaces `$GLOBALS['wp_query']`** with an offset query (so `the_posts_pagination()` works), `artpress_restore_query()` puts it back. Offset = `9 + (paged-1) * posts_per_page`; `found_posts` is reduced by 9.
