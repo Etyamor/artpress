@@ -15,6 +15,12 @@ if (poFiles.length === 0) {
 for (const file of poFiles) {
   const poData = gettextParser.po.parse(readFileSync(`${dir}/${file}`));
   const poTranslations = poData.translations;
+  // Plural strings need one msgstr per plural form of this language
+  // (e.g. 3 for Ukrainian), not the 2 the .pot template carries.
+  const nplurals = Number(/nplurals\s*=\s*(\d+)/.exec(poData.headers?.['Plural-Forms'] ?? '')?.[1] ?? 2);
+  const pluralSlots = (entry) => (entry.msgid_plural
+    ? { ...entry, msgstr: Array.from({ length: nplurals }, (_, i) => entry.msgstr?.[i] ?? '') }
+    : entry);
   const merged = {};
   let added = 0;
   let removed = 0;
@@ -31,13 +37,13 @@ for (const file of poFiles) {
       const existing = poTranslations[context]?.[msgid];
       if (existing) {
         // Keep existing translation, update references from .pot
-        merged[context][msgid] = {
+        merged[context][msgid] = pluralSlots({
           ...existing,
           comments: { ...existing.comments, reference: potEntry.comments?.reference },
-        };
+        });
       } else {
         // New string — add with empty translation
-        merged[context][msgid] = potEntry;
+        merged[context][msgid] = pluralSlots(potEntry);
         added++;
       }
     }
