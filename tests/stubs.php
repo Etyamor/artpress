@@ -121,3 +121,16 @@ class Artpress_Json_Response extends Exception {
         $this->status  = $status;
     }
 }
+
+/**
+ * Minimal WP_Error.
+ */
+class WP_Error {
+    public $code;
+    public $message;
+
+    public function __construct($code = '', $message = '') {
+        $this->code    = $code;
+        $this->message = $message;
+    }
+}

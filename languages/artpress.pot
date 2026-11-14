@@ -97,6 +97,23 @@ msgstr ""
 msgid "Something went wrong. Please try again."
 msgstr ""
 
+#: inc/updater.php:199
+msgid "Sorry, you are not allowed to update themes."
+msgstr ""
+
+#. translators: %s: theme version.
+#: inc/updater.php:212
+msgid "ArtPress %s"
+msgstr ""
+
+#: inc/updater.php:224
+msgid "View the release on GitHub"
+msgstr ""
+
+#: inc/updater.php:209
+msgid "Release information is not available right now."
+msgstr ""
+
 #. translators: %d: page number.
 #: template-parts/index.php:10
 msgid " — Page %d"

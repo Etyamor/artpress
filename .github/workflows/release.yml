@@ -5,9 +5,9 @@ on:
   workflow_dispatch:
     inputs:
       create_release:
-        description: 'Also publish a GitHub Release (tag v<style.css Version>) with the zip attached'
+        description: 'Publish a GitHub Release (tag v<style.css Version>) — this is what delivers the update to WordPress sites'
         type: boolean
-        default: false
+        default: true
 
 permissions:
   contents: read
@@ -49,11 +49,22 @@ jobs:
           unzip -l "${{ steps.meta.outputs.zip }}" | grep -q 'artpress/dist/.vite/manifest.json'
           ! unzip -l "${{ steps.meta.outputs.zip }}" | grep -qE 'artpress/(node_modules|vendor|tests|resources)/'
 
+      # Update manifest read by inc/updater.php on every site.
+      - name: Generate info.json
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          node scripts/release-info.mjs "$GITHUB_REPOSITORY" > info.json
+          cat info.json
+          test "$(node -p 'require("./info.json").version')" = "$VERSION"
+
+      # archive: false uploads the theme zip as-is. Without it the artifact is
+      # wrapped in another zip, which WordPress can't install.
       - name: Upload artifact
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v7
         with:
-          name: artpress-${{ steps.meta.outputs.version }}
           path: ${{ steps.meta.outputs.zip }}
+          archive: false
           if-no-files-found: error
 
       - name: Publish GitHub Release
@@ -67,7 +78,27 @@ jobs:
             echo "::error::Release v$VERSION already exists — bump Version in style.css first."
             exit 1
           fi
-          gh release create "v$VERSION" "$ZIP" \
+          gh release create "v$VERSION" "$ZIP" info.json \
             --target "$GITHUB_SHA" \
             --title "ArtPress $VERSION" \
-            --generate-notes
+            --generate-notes \
+            --latest
+
+      # Download exactly what WordPress sites will download.
+      - name: Verify published update
+        if: ${{ inputs.create_release }}
+        env:
+          VERSION: ${{ steps.meta.outputs.version }}
+        run: |
+          mkdir -p /tmp/check && cd /tmp/check
+          curl -fsSL --retry 5 --retry-all-errors \
+            "https://github.com/$GITHUB_REPOSITORY/releases/latest/download/info.json" -o info.json
+          test "$(node -p 'require("./info.json").version')" = "$VERSION"
+          curl -fsSL --retry 5 --retry-all-errors "$(node -p 'require("./info.json").package')" -o theme.zip
+          unzip -l theme.zip | grep -q ' artpress/style.css$'
+          unzip -p theme.zip artpress/style.css | grep -q "^Version: $VERSION"
+          {
+            echo "### ArtPress $VERSION released"
+            echo
+            echo "WordPress sites will offer the update within ~12 hours (Dashboard → Updates → *Check again* to see it immediately)."
+          } >> "$GITHUB_STEP_SUMMARY"

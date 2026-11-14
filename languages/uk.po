@@ -103,6 +103,23 @@ msgstr "Дякуємо за підписку!"
 msgid "Something went wrong. Please try again."
 msgstr "Щось пішло не так. Спробуйте ще раз."
 
+#: inc/updater.php:199
+msgid "Sorry, you are not allowed to update themes."
+msgstr "Вибачте, у вас немає прав на оновлення тем."
+
+#: inc/updater.php:212
+#. translators: %s: theme version.
+msgid "ArtPress %s"
+msgstr "ArtPress %s"
+
+#: inc/updater.php:224
+msgid "View the release on GitHub"
+msgstr "Переглянути реліз на GitHub"
+
+#: inc/updater.php:209
+msgid "Release information is not available right now."
+msgstr "Інформація про реліз зараз недоступна."
+
 #: template-parts/index.php:10
 msgid " — Page %d"
 msgstr " — Сторінка %d"
