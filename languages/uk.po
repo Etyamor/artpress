@@ -70,8 +70,9 @@ msgstr "Бічна панель"
 #. translators: %d: reading time in minutes.
 msgid "%d min"
 msgid_plural "%d min"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%d хв"
+msgstr[1] "%d хв"
+msgstr[2] "%d хв"
 
 #: inc/subscribe.php:13
 msgid "Security check failed."
