@@ -102,6 +102,23 @@ msgstr "¡Gracias por suscribirte!"
 msgid "Something went wrong. Please try again."
 msgstr "Algo salió mal. Por favor, inténtalo de nuevo."
 
+#: inc/updater.php:199
+msgid "Sorry, you are not allowed to update themes."
+msgstr "Lo siento, no tienes permisos para actualizar temas."
+
+#: inc/updater.php:212
+#. translators: %s: theme version.
+msgid "ArtPress %s"
+msgstr "ArtPress %s"
+
+#: inc/updater.php:224
+msgid "View the release on GitHub"
+msgstr "Ver la versión en GitHub"
+
+#: inc/updater.php:209
+msgid "Release information is not available right now."
+msgstr "La información de la versión no está disponible en este momento."
+
 #: template-parts/index.php:10
 msgid " — Page %d"
 msgstr " — Página %d"
