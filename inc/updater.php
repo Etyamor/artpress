@@ -2,7 +2,7 @@
 /**
  * Theme updates from GitHub Releases.
  *
- * Every release (Actions → Build theme zip) carries two assets: the theme zip
+ * Every release (Actions → Release) carries two assets: the theme zip
  * and info.json (see scripts/release-info.mjs). WordPress's regular theme
  * update check is extended with the newest info.json, so "Update now" and
  * auto-updates work as for wordpress.org themes.
