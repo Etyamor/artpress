@@ -65,7 +65,7 @@ msgstr "Información legal del pie de página"
 msgid "Sidebar"
 msgstr "Barra lateral"
 
-#: inc/setup.php:43
+#: inc/setup.php:63
 #. translators: %d: reading time in minutes.
 msgid "%d min"
 msgid_plural "%d min"
@@ -102,6 +102,15 @@ msgstr "¡Gracias por suscribirte!"
 msgid "Something went wrong. Please try again."
 msgstr "Algo salió mal. Por favor, inténtalo de nuevo."
 
+#: inc/template-helpers.php:42
+#. translators: %s: date the post was last updated.
+msgid "Updated %s"
+msgstr "Actualizado %s"
+
+#: inc/template-helpers.php:124
+msgid "Breadcrumbs"
+msgstr "Migas de pan"
+
 #: inc/updater.php:199
 msgid "Sorry, you are not allowed to update themes."
 msgstr "Lo siento, no tienes permisos para actualizar temas."
@@ -123,24 +132,24 @@ msgstr "La información de la versión no está disponible en este momento."
 msgid " — Page %d"
 msgstr " — Página %d"
 
-#: template-parts/index.php:30
+#: template-parts/index.php:40
 msgid "Latest Posts"
 msgstr "Últimas publicaciones"
 
-#: template-parts/index.php:15
+#: template-parts/index.php:25
 #, php-format
 msgid "Search results for: %s"
 msgstr "Resultados de búsqueda para: %s"
 
-#: template-parts/index.php:68
+#: template-parts/index.php:87
 msgid "No posts found."
 msgstr "No se encontraron publicaciones."
 
-#: template-parts/post-card.php:50
+#: template-parts/post-card.php:53
 msgid "Read more"
 msgstr "Leer más"
 
-#: template-parts/singular.php:48, template-parts/single/infinite-article.php:43
+#: template-parts/singular.php:51, template-parts/single/infinite-article.php:46
 msgid "Tags:"
 msgstr "Etiquetas:"
 

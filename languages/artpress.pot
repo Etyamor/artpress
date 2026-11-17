@@ -63,7 +63,7 @@ msgid "Sidebar"
 msgstr ""
 
 #. translators: %d: reading time in minutes.
-#: inc/setup.php:43
+#: inc/setup.php:63
 msgid "%d min"
 msgid_plural "%d min"
 msgstr[0] ""
@@ -97,6 +97,15 @@ msgstr ""
 msgid "Something went wrong. Please try again."
 msgstr ""
 
+#. translators: %s: date the post was last updated.
+#: inc/template-helpers.php:42
+msgid "Updated %s"
+msgstr ""
+
+#: inc/template-helpers.php:124
+msgid "Breadcrumbs"
+msgstr ""
+
 #: inc/updater.php:199
 msgid "Sorry, you are not allowed to update themes."
 msgstr ""
@@ -119,24 +128,24 @@ msgstr ""
 msgid " — Page %d"
 msgstr ""
 
-#: template-parts/index.php:30
+#: template-parts/index.php:40
 msgid "Latest Posts"
 msgstr ""
 
 #. translators: %s: search query.
-#: template-parts/index.php:15
+#: template-parts/index.php:25
 msgid "Search results for: %s"
 msgstr ""
 
-#: template-parts/index.php:68
+#: template-parts/index.php:87
 msgid "No posts found."
 msgstr ""
 
-#: template-parts/post-card.php:50
+#: template-parts/post-card.php:53
 msgid "Read more"
 msgstr ""
 
-#: template-parts/singular.php:48, template-parts/single/infinite-article.php:43
+#: template-parts/singular.php:51, template-parts/single/infinite-article.php:46
 msgid "Tags:"
 msgstr ""
 

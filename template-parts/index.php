@@ -8,9 +8,19 @@
     $page_num    = (int) get_query_var('paged', 0);
     /* translators: %d: page number. */
     $page_suffix = $page_num > 1 ? sprintf(esc_html__(' — Page %d', 'artpress'), $page_num) : '';
+
+    if (!$is_home && !is_search()) {
+        artpress_breadcrumbs();
+    }
     ?>
     <h1 class="<?php echo esc_attr($h1_class); ?>"><?php
-        if (is_search()) {
+        if ($is_home) {
+            // Visually hidden: the hero is the visual start of the page, but the
+            // page's main heading should name the site, not "Latest Posts".
+            $description = get_bloginfo('description');
+            echo esc_html(get_bloginfo('name') . ('' !== $description ? ' — ' . $description : ''));
+            echo esc_html($page_suffix);
+        } elseif (is_search()) {
             /* translators: %s: search query. */
             printf(esc_html__('Search results for: %s', 'artpress'), '<span class="text-accent">' . esc_html(get_search_query()) . '</span>');
             echo esc_html($page_suffix);
@@ -52,8 +62,17 @@
                 <?php $layout = $is_home ? 'grid' : artpress_current_archive_layout(); ?>
                 <div class="<?php echo esc_attr(artpress_layout_wrapper_class($layout)); ?>">
 
+                <?php $card_index = 0; ?>
                 <?php while (have_posts()) : the_post(); ?>
-                    <?php get_template_part('template-parts/post-card', null, ['layout' => $layout]); ?>
+                    <?php
+                    // On archives the first card's image is the largest thing in
+                    // the first screen (LCP) — don't lazy-load it. On the home
+                    // page the hero comes first and gets that priority instead.
+                    get_template_part('template-parts/post-card', null, [
+                        'layout'   => $layout,
+                        'priority' => !$is_home && 0 === $card_index++,
+                    ]);
+                    ?>
                 <?php endwhile; ?>
 
                 </div>

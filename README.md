@@ -19,6 +19,7 @@ A blog-focused classic WordPress theme. Assets are built with **Vite**, styled w
 | Advanced Ads / AdSense compatibility patches | `inc/ads-compat.php` | — |
 | Per-category archive layout: list / grid, with or without images | `inc/category-layout.php`, `template-parts/post-card.php` | Posts → Categories → edit → *Posts layout* |
 | Related posts | `template-parts/single/related-posts.php` | — |
+| SEO: author byline + "Updated" date, breadcrumbs (Rank Math / Yoast), LCP-friendly first archive image, site-name H1 on the home page | `inc/template-helpers.php`, `template-parts/index.php` | Breadcrumbs: Rank Math → General Settings → Breadcrumbs |
 | Updates from GitHub Releases ("Update now" + auto-updates in WordPress) | `inc/updater.php`, `scripts/release-info.mjs` | — |
 
 ## Requirements for development
