@@ -70,7 +70,7 @@ Whitespace/formatting rules are deliberately not enforced. Intentional exception
 
 ## CI/CD (GitHub Actions)
 
-- **CI** (`.github/workflows/ci.yml`) — on every push to `main` and every PR: PHPCS, PHPUnit on PHP 8.0–8.4, TypeScript type-check + Vite build.
+- **CI** (`.github/workflows/ci.yml`) — on every push to `main` and every PR: PHPCS, PHPUnit on PHP 8.2–8.4, TypeScript type-check + Vite build.
 - **Release** (`.github/workflows/release.yml`) — manual. Go to **Actions → Release → Run workflow** and choose:
   - `patch` — `1.1.3 → 1.1.4`
   - `minor` — `1.1.3 → 1.2.0`
