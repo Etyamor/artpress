@@ -12,10 +12,13 @@
             <article class="flex-1 min-w-0">
                 <!-- Header -->
                 <header class="mb-8">
+                    <?php artpress_breadcrumbs(); ?>
                     <?php artpress_post_meta([
-                        'class'        => 'flex items-center gap-2 text-sm text-muted mb-3',
+                        'class'        => 'flex flex-wrap items-center gap-x-2 gap-y-1 text-sm text-muted mb-3',
                         'separator'    => 'middot',
                         'reading_time' => true,
+                        'author'       => true,
+                        'updated'      => true,
                     ]); ?>
                     <h1 class="text-3xl font-bold text-foreground mb-4"><?php the_title(); ?></h1>
                     <?php if (has_post_thumbnail()) : ?>

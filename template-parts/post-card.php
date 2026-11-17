@@ -4,6 +4,8 @@
  *
  * Expects $args['layout']: one of the keys of artpress_category_layouts()
  * ('list', 'grid', 'list-text', 'grid-text'). Defaults to 'grid'.
+ * Optional $args['priority']: load this card's image eagerly with high fetch
+ * priority (the first card on archive pages).
  */
 $layout     = artpress_sanitize_category_layout($args['layout'] ?? 'grid');
 $has_images = artpress_layout_has_images($layout);
@@ -36,6 +38,7 @@ if ($has_images && !$is_grid) {
             'aspect'      => $is_grid ? 'aspect-16/9' : 'aspect-4/3',
             'extra_class' => $is_grid ? '' : 'md:w-72 md:shrink-0',
             'lazy'        => true,
+            'priority'    => !empty($args['priority']),
         ]);
     endif; ?>
     <div class="p-5 flex-1 min-w-0">
