@@ -4,7 +4,7 @@ Contributors: Maksym Rutkovskyi
 Requires at least: 6.1
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.4.0
+Stable tag: 1.4.1
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ Yes. The theme includes a sidebar widget area. Go to "Appearance > Widgets" to a
 The newsletter subscribe section is included in the footer by default. Submissions are handled by the theme and delivered to the site owner's admin email.
 
 == Changelog ==
+
+= 1.4.1 =
+* Fix empty ad slots between posts (AdSense "No slot size for availableWidth=0")
 
 = 1.4.0 =
 * Ad slots between posts on the home page, category and tag archives (optionally author/date archives and search)
