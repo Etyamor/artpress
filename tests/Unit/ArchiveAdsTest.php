@@ -139,6 +139,9 @@ class ArchiveAdsTest extends TestCase {
         $this->assertStringContainsString('data-artpress-ad-slot="1"', $html);
         $this->assertStringContainsString('<div class="ad">AD</div>', $html);
         $this->assertStringNotContainsString('py-5', $html);
+        // Flex would shrink the ad container to 0px and break responsive AdSense units.
+        $this->assertStringNotContainsString('flex', $html);
+        $this->assertStringContainsString('w-full', $html);
     }
 
     public function test_list_text_layout_gets_row_padding() {

@@ -95,9 +95,13 @@ function artpress_get_archive_ad($position, $total, $layout = 'grid') {
         return '';
     }
 
+    // A plain block, not flex: responsive AdSense units size themselves from
+    // their container's width when push() runs, and a flex item shrinks to its
+    // (still empty) content — "No slot size for availableWidth=0".
+    // text-center still centres fixed-size (inline-block) units.
     // Grid layouts: span the whole row. list-text sits in a divided list with
     // vertical padding on each row.
-    $class = 'artpress-ad col-span-full flex justify-center overflow-hidden';
+    $class = 'artpress-ad col-span-full w-full min-w-0 text-center overflow-hidden';
     if ('list-text' === $layout) {
         $class .= ' py-5';
     }
