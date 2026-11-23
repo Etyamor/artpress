@@ -4,7 +4,7 @@ Contributors: Maksym Rutkovskyi
 Requires at least: 6.1
 Tested up to: 6.7
 Requires PHP: 8.0
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,11 @@ Yes. The theme includes a sidebar widget area. Go to "Appearance > Widgets" to a
 The newsletter subscribe section is included in the footer by default. Submissions are handled by the theme and delivered to the site owner's admin email.
 
 == Changelog ==
+
+= 1.4.0 =
+* Ad slots between posts on the home page, category and tag archives (optionally author/date archives and search)
+* New ArtPress → Ads settings: page types, every N posts, max slots per page and ad code
+* Works with Advanced Ads Manual Placement shortcodes, AdSense or any HTML/JS
 
 = 1.3.0 =
 * Added author byline and updated date
