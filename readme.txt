@@ -23,6 +23,7 @@ ArtPress is a lightweight WordPress theme designed for blogs and creative conten
 * Newsletter subscribe section
 * Sidebar with Categories and Tag Cloud widgets
 * Pagination support
+* Ad slots between posts on the home page, archives and search (Advanced Ads shortcodes or any ad code)
 * Translation-ready
 
 == Installation ==
