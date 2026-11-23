@@ -72,6 +72,7 @@
                         'layout'   => $layout,
                         'priority' => !$is_home && 0 === $card_index++,
                     ]);
+                    artpress_archive_ad($layout);
                     ?>
                 <?php endwhile; ?>
 

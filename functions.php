@@ -12,5 +12,6 @@ require_once get_template_directory() . '/inc/category-layout.php';
 require_once get_template_directory() . '/inc/subscribe.php';
 require_once get_template_directory() . '/inc/infinite-article.php';
 require_once get_template_directory() . '/inc/ads-compat.php';
+require_once get_template_directory() . '/inc/archive-ads.php';
 require_once get_template_directory() . '/inc/updater.php';
 require_once get_template_directory() . '/inc/admin/settings.php';
