@@ -23,6 +23,7 @@ function artpress_settings_page() {
     $tabs = [
         'general' => 'General',
         'ads'     => 'Ads',
+        'code'    => 'Custom Code',
         'smtp'    => 'SMTP',
     ];
 
@@ -61,6 +62,18 @@ function artpress_settings_page() {
                 <?php
                 settings_fields('artpress_ads');
                 artpress_ads_render_fields();
+                submit_button();
+                ?>
+            </form>
+        <?php endif; ?>
+
+        <?php if ($active_tab === 'code') : ?>
+            <form method="post" action="options.php">
+                <?php
+                // Top-level menu pages don't print settings errors on their own.
+                settings_errors('artpress_custom_code');
+                settings_fields('artpress_custom_code');
+                artpress_custom_code_render_fields();
                 submit_button();
                 ?>
             </form>
