@@ -8,6 +8,8 @@ require_once get_template_directory() . '/inc/admin/general/options.php';
 require_once get_template_directory() . '/inc/admin/general/fields.php';
 require_once get_template_directory() . '/inc/admin/ads/options.php';
 require_once get_template_directory() . '/inc/admin/ads/fields.php';
+require_once get_template_directory() . '/inc/admin/custom-code/options.php';
+require_once get_template_directory() . '/inc/admin/custom-code/fields.php';
 require_once get_template_directory() . '/inc/admin/smtp/options.php';
 require_once get_template_directory() . '/inc/admin/smtp/fields.php';
 require_once get_template_directory() . '/inc/admin/smtp/hooks.php';
